@@ -1,0 +1,723 @@
+/* ==================== CSS Variables ==================== */
+:root {
+    --primary: #d4a574;
+    --primary-dark: #b8935f;
+    --accent-gold: #f4d03f;
+    --bg-dark: #0a0a0a;
+    --bg-card: #1a1a1a;
+    --bg-card-light: #252525;
+    --text-light: #ffffff;
+    --text-gold: #d4a574;
+    --text-gray: #a0a0a0;
+    --border-gold: #d4a574;
+    --shadow-gold: rgba(212, 165, 116, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.8);
+    
+    /* Category Colors */
+    --cat-attraction: #d4a574;
+    --cat-restaurant: #e6b87d;
+    --cat-shopping: #c9a961;
+    --cat-specialty: #daa65f;
+    --cat-market: #b8935f;
+}
+
+/* ==================== Reset ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Noto Serif TC', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ==================== Hero Section ==================== */
+.hero-section {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.6s ease;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hero-section h1 {
+    font-family: 'Playfair Display', 'Noto Serif TC', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.hero-dates {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.hero-divider {
+    margin: 0 1.5rem;
+    opacity: 0.8;
+    color: var(--accent-gold);
+}
+
+/* ==================== Route Overview ==================== */
+.route-overview {
+    background: var(--bg-card);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.route-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.route-path {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+/* ==================== Container ==================== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ==================== Map Section ==================== */
+.map-section {
+    margin-bottom: 3rem;
+}
+
+.category-legend {
+    background: var(--bg-card);
+    padding: 1.2rem;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.legend-item {
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-gray);
+    user-select: none;
+}
+
+.legend-item:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.legend-item[data-category="attraction"]::before { color: var(--cat-attraction); }
+.legend-item[data-category="restaurant"]::before { color: var(--cat-restaurant); }
+.legend-item[data-category="shopping"]::before { color: var(--cat-shopping); }
+.legend-item[data-category="specialty"]::before { color: var(--cat-specialty); }
+.legend-item[data-category="market"]::before { color: var(--cat-market); }
+
+.map-tip {
+    background: var(--bg-card);
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-gold);
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.map-container {
+    background: var(--bg-card);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px var(--shadow-dark);
+    border: 1px solid var(--border-gold);
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+/* ==================== Section Title ==================== */
+.section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* ==================== Transport Selector ==================== */
+.transport-selector {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px var(--shadow);
+}
+
+.transport-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border: 2px solid var(--border-light);
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: 'Noto Sans TC', sans-serif;
+    width: 100%;
+}
+
+.transport-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* ==================== Day Selector ==================== */
+.day-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.day-card {
+    background: var(--bg-card);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-gold);
+    border-color: var(--primary);
+}
+
+.day-card.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border-color: var(--accent-gold);
+    box-shadow: 0 6px 20px var(--shadow-gold);
+}
+
+.day-label {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.day-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.day-weather {
+    font-size: 1.8rem;
+    margin-top: 0.3rem;
+}
+
+/* ==================== Itinerary Container ==================== */
+#itinerary-container {
+    background: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+/* ==================== Day Header ==================== */
+.day-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 2rem;
+    position: relative;
+}
+
+.day-header h2 {
+    font-family: 'Playfair Display', 'Noto Serif TC', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.day-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.day-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ==================== Hotel Card (in itinerary) ==================== */
+.hotel-card-inline {
+    background: var(--bg-cream);
+    padding: 1.5rem;
+    margin: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.hotel-card-inline img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.hotel-card-inline h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.hotel-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.hotel-feature {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+.hotel-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+}
+
+/* ==================== Category Filters ==================== */
+.category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: var(--bg-cream);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.category-btn {
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--border-light);
+    background: var(--bg-white);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.category-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* ==================== Meal Filters ==================== */
+.meal-filters {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: var(--bg-white);
+    border-bottom: 2px solid var(--border-light);
+    justify-content: center;
+}
+
+.meal-btn {
+    padding: 0.7rem 1.8rem;
+    border: none;
+    background: var(--bg-cream);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meal-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.meal-btn.active {
+    background: var(--primary-dark);
+    color: white;
+}
+
+/* ==================== Timeline ==================== */
+.timeline {
+    position: relative;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 2.8rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--timeline-gold);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 4rem;
+    margin-bottom: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item.hidden {
+    display: none;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 1.8rem;
+    top: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 3px solid var(--bg-white);
+    box-shadow: 0 2px 8px var(--shadow);
+    z-index: 2;
+}
+
+.timeline-time {
+    background: var(--text-dark);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.timeline-content {
+    background: var(--bg-cream);
+    padding: 1.2rem;
+    border-radius: 12px;
+    border-left: 3px solid var(--timeline-gold);
+}
+
+.timeline-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: var(--bg-white);
+    color: var(--text-dark);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-light);
+}
+
+/* ==================== Info Cards ==================== */
+.info-section {
+    margin-top: 3rem;
+}
+
+.info-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.info-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.flight-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.flight-item:last-child {
+    border-bottom: none;
+}
+
+.flight-label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.flight-detail {
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+.hotel-item-detail {
+    padding: 1.5rem;
+    background: var(--bg-cream);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.hotel-item-detail:last-child {
+    margin-bottom: 0;
+}
+
+.hotel-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.hotel-location {
+    color: var(--text-gray);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.hotel-dates {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* ==================== Footer ==================== */
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-light);
+    margin-top: 3rem;
+}
+
+/* ==================== Animations ==================== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .day-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #map {
+        height: 350px;
+    }
+
+    .timeline {
+        padding-left: 1rem;
+    }
+
+    .timeline::before {
+        left: 1.8rem;
+    }
+
+    .timeline-item {
+        padding-left: 3.5rem;
+    }
+
+    .timeline-dot {
+        left: 0.8rem;
+    }
+
+    .category-filters,
+    .meal-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+
+    .flight-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== Supermarket Markers ==================== */
+.supermarket-marker {
+    background: #6ba985 !important;
+    border: 3px solid white !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4) !important;
+}
+
+.supermarket-marker::after {
+    content: '🛒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+}
+
+/* ==================== Scrollbar ==================== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
