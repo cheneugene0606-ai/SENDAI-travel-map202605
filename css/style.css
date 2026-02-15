@@ -1,4 +1,4 @@
-/* ==================== 核心變數與色彩定義 ==================== */
+/* ==================== 核心變數設定 ==================== */
 :root {
     --primary: #d4a574;
     --primary-dark: #b8935f;
@@ -6,333 +6,187 @@
     --bg-dark: #0a0a0a;
     --bg-card: #1a1a1a;
     --bg-card-light: #252525;
-    --bg-cream: #1a1a1a; /* 修正：解決背景透明導致框框消失的問題 */
+    --bg-cream: #1a1a1a; /* 修正：解決部分 UI 背景透明的問題 */
     --text-light: #ffffff;
     --text-gold: #d4a574;
     --text-gray: #a0a0a0;
     --border-gold: #d4a574;
     --shadow-gold: rgba(212, 165, 116, 0.3);
     --shadow-dark: rgba(0, 0, 0, 0.8);
+    
+    /* 分類顏色 */
+    --cat-attraction: #d4a574;
+    --cat-restaurant: #e6b87d;
+    --cat-shopping: #c9a961;
+    --cat-specialty: #daa65f;
+    --cat-market: #b8935f;
 }
 
 /* ==================== 基礎重置 ==================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Noto Sans TC', sans-serif; 
+    background: var(--bg-dark); 
+    color: var(--text-light); 
+    line-height: 1.6; 
+    overflow-x: hidden; 
 }
 
-body {
-    font-family: 'Noto Sans TC', 'Noto Serif TC', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* ==================== Hero 橫幅 ==================== */
+/* ==================== Hero 區域 ==================== */
 .hero-section {
     position: relative;
-    height: 450px;
+    height: 400px;
     background: linear-gradient(135deg, #000, #1a1a1a);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 0.6s ease;
+    display: flex; align-items: center; justify-content: center;
+    background-size: cover; background-position: center;
     border-bottom: 2px solid var(--border-gold);
+    transition: background-image 0.5s ease;
 }
-
 .hero-overlay {
-    z-index: 2;
-    text-align: center;
+    z-index: 2; text-align: center;
     background: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 15px;
+    padding: 2rem; border-radius: 15px;
 }
-
 .hero-section h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #f4d03f, #d4a574, #f4d03f);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.5rem; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #f4d03f, #d4a574);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
+.hero-subtitle { letter-spacing: 3px; color: var(--text-gray); font-size: 0.9rem; }
+.hero-dates { margin-top: 10px; color: var(--primary); font-weight: bold; }
 
-/* ==================== 路線總覽 ==================== */
-.route-overview {
-    background: var(--bg-card);
-    padding: 2rem;
-    text-align: center;
-    border-bottom: 1px solid var(--border-gold);
-}
-
-.route-path {
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    color: var(--text-gold);
-}
-
-/* ==================== 地圖區域 ==================== */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
-.map-container {
-    background: var(--bg-card);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border-gold);
-    box-shadow: 0 8px 30px var(--shadow-dark);
-}
-
-#map {
-    width: 100%;
-    height: 450px;
-}
-
-/* ==================== 區塊標題 ==================== */
+/* ==================== 共用容器與標題 ==================== */
+.container { max-width: 900px; margin: 0 auto; padding: 1rem; }
 .section-title {
-    font-size: 1.8rem;
-    color: var(--primary);
-    text-align: center;
-    margin: 3rem 0 1.5rem;
-    letter-spacing: 2px;
+    font-size: 1.6rem; color: var(--primary); text-align: center;
+    margin: 2.5rem 0 1.5rem; letter-spacing: 1px;
+    border-bottom: 1px solid var(--border-gold); display: inline-block;
+    padding-bottom: 5px; width: 100%;
 }
+.route-overview { background: var(--bg-card); padding: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-gold); }
+.route-path { color: var(--text-gold); font-weight: bold; letter-spacing: 1px; margin-top: 10px; }
 
-/* ==================== 天數選擇器 ==================== */
-.day-selector {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
-    margin-bottom: 2rem;
-}
+/* ==================== 地圖與天數選擇 ==================== */
+.map-container { border: 1px solid var(--border-gold); border-radius: 12px; overflow: hidden; }
+#map { width: 100%; height: 400px; }
 
+.day-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 2rem; }
 .day-card {
-    background: var(--bg-card);
-    border: 1.5px solid #333;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
+    background: var(--bg-card); border: 1px solid #444; border-radius: 8px;
+    padding: 10px; text-align: center; cursor: pointer; transition: 0.3s;
 }
-
 .day-card.active {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border-color: var(--accent-gold);
-    color: var(--bg-dark);
+    border-color: var(--accent-gold); color: var(--bg-dark);
 }
+.day-label { font-size: 0.8rem; opacity: 0.8; }
+.day-date { font-weight: bold; font-size: 1.1rem; }
 
-/* ==================== 行程內容卡片 (修復框框) ==================== */
-.timeline-content {
-    background: var(--bg-card-light) !important; /* 確保背景不是透明 */
-    border-left: 4px solid var(--accent-gold);
-    padding: 1.2rem;
-    border-radius: 12px;
-    margin-top: 0.5rem;
-    box-shadow: 0 4px 15px var(--shadow-dark);
-}
-
-.timeline-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-
-.timeline-desc {
-    color: var(--text-gray);
-    font-size: 0.95rem;
-}
-
-/* 選項標籤 */
-.option-badge {
-    background: rgba(212, 165, 116, 0.2);
-    color: var(--accent-gold);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-left: 8px;
-    font-weight: bold;
-}
-
-/* ==================== 篩選按鈕 ==================== */
-.meal-filters {
-    display: flex;
-    gap: 10px;
-    padding: 1rem;
-    overflow-x: auto;
-    justify-content: center;
-}
-
+/* ==================== 行程列表與卡片 (框框修復) ==================== */
+.meal-filters { display: flex; gap: 10px; padding: 1rem; overflow-x: auto; justify-content: center; }
 .meal-btn {
-    padding: 8px 16px;
-    background: var(--bg-card-light);
-    border: 1px solid var(--border-gold);
-    color: var(--text-gray);
-    border-radius: 20px;
-    white-space: nowrap;
-    cursor: pointer;
+    padding: 6px 14px; background: var(--bg-card-light); border: 1px solid var(--border-gold);
+    color: var(--text-gray); border-radius: 20px; white-space: nowrap; cursor: pointer;
 }
+.meal-btn.active { background: var(--primary); color: var(--bg-dark); font-weight: bold; }
 
-.meal-btn.active {
-    background: var(--primary);
-    color: var(--bg-dark);
-    font-weight: bold;
+.timeline { padding: 10px; }
+.timeline-item { display: flex; gap: 15px; margin-bottom: 20px; position: relative; }
+.timeline-dot {
+    width: 25px; height: 25px; background: var(--primary); color: var(--bg-dark);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 0.8rem; z-index: 2; flex-shrink: 0;
 }
+.timeline-time { font-weight: bold; color: var(--primary); width: 50px; flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
+.timeline-content {
+    background: var(--bg-card-light) !important; /* 確保背景色存在 */
+    border-left: 3px solid var(--accent-gold);
+    padding: 1rem; border-radius: 8px; flex-grow: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.timeline-title { font-weight: bold; color: var(--text-light); margin-bottom: 5px; }
+.timeline-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 8px; }
+.tag { background: #333; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 5px; color: var(--text-gold); }
+.option-badge { background: rgba(212, 165, 116, 0.2); color: var(--accent-gold); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-left: 5px; }
 
-/* ==================== 旅行工具面板 (Debug 修復排版) ==================== */
+/* ==================== 旅行工具 UI 修復 (解決紫色連結問題) ==================== */
 .tools-panel {
-    position: fixed;
-    bottom: -100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-card);
-    border-top: 3px solid var(--border-gold);
-    transition: 0.4s ease;
-    z-index: 1001;
-    max-height: 70vh;
-    overflow-y: auto;
+    position: fixed; bottom: -100%; left: 0; right: 0;
+    background: var(--bg-card); border-top: 3px solid var(--border-gold);
+    transition: 0.4s ease; z-index: 1001; max-height: 70vh; overflow-y: auto;
 }
-
-.tools-panel.active {
-    bottom: 0;
-}
+.tools-panel.active { bottom: 0; }
+.tools-header { padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+.tools-close-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
 
 .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 修正：兩欄排版 */
-    gap: 15px;
-    padding: 20px;
+    display: grid; grid-template-columns: repeat(2, 1fr); /* 雙欄排版 */
+    gap: 15px; padding: 20px;
 }
-
 .tool-card {
     background: var(--bg-card-light);
-    border: 1.5px solid var(--border-gold);
-    border-radius: 12px;
-    padding: 1.2rem;
+    border: 1px solid var(--border-gold);
+    border-radius: 12px; padding: 1.2rem;
     text-align: center;
-    text-decoration: none !important; /* 修復：移除紫色底線 */
-    color: var(--text-light) !important; /* 修復：移除紫色連結色 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    text-decoration: none !important; /* 移除底線 */
+    color: var(--text-light) !important; /* 移除紫色 */
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
     transition: 0.3s;
 }
-
-.tool-card:hover {
-    border-color: var(--accent-gold);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--shadow-gold);
-}
-
-.tool-icon { font-size: 2.2rem; }
+.tool-card:hover { border-color: var(--accent-gold); transform: translateY(-3px); box-shadow: 0 5px 15px var(--shadow-gold); }
+.tool-icon { font-size: 2rem; }
 .tool-name { font-weight: bold; color: var(--primary); font-size: 1rem; }
 .tool-desc { font-size: 0.8rem; color: var(--text-gray); }
 
-/* ==================== 方案選擇面板 ==================== */
+/* ==================== 方案與店家列表 ==================== */
 .restaurant-options-panel {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    width: 90%; max-width: 500px;
-    background: var(--bg-card);
-    border: 2px solid var(--border-gold);
-    border-radius: 16px;
-    z-index: 2005;
-    opacity: 0; visibility: hidden;
-    transition: 0.3s;
-    padding: 20px;
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+    width: 90%; max-width: 500px; background: var(--bg-card);
+    border: 2px solid var(--border-gold); border-radius: 12px;
+    z-index: 2005; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px;
+    max-height: 80vh; overflow-y: auto;
+}
+.restaurant-options-panel.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+.restaurant-options-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+.restaurant-options-close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+.restaurant-option-card, .store-item {
+    background: var(--bg-card-light); border: 1px solid var(--border-gold);
+    padding: 15px; border-radius: 10px; margin-bottom: 12px;
 }
 
-.restaurant-options-panel.active {
-    opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1);
-}
-
-.restaurant-option-card {
-    background: var(--bg-card-light);
-    border: 1px solid #444;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-}
-
-/* ==================== 浮動按鈕 ==================== */
+/* ==================== 浮動按鈕與彈窗 ==================== */
 .float-btn {
-    position: fixed;
-    right: 20px;
+    position: fixed; right: 20px;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: var(--bg-dark);
-    border: 2px solid var(--accent-gold);
-    border-radius: 50px;
-    padding: 10px 20px;
-    font-weight: bold;
-    z-index: 1000;
-    cursor: pointer;
-    box-shadow: 0 4px 15px var(--shadow-gold);
+    color: var(--bg-dark); border: 2px solid var(--accent-gold);
+    border-radius: 50px; padding: 10px 20px; font-weight: bold;
+    z-index: 1000; cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
 }
-
 .tools-btn-pos { bottom: 20px; }
-.coupon-btn-pos { bottom: 85px; }
-.itinerary-btn-pos { bottom: 150px; }
+.coupon-btn-pos { bottom: 80px; }
+.itinerary-btn-pos { bottom: 140px; }
 
-/* ==================== 優惠券彈窗 ==================== */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); display: none; z-index: 2000;
-}
-
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 2000; }
 .modal-content {
-    position: fixed; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%; max-width: 400px;
-    background: var(--bg-card);
-    border: 2px solid var(--border-gold);
-    border-radius: 12px;
-    padding: 2rem;
-    display: none; z-index: 2001;
-    text-align: center;
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 85%; max-width: 400px; background: var(--bg-card);
+    border: 2px solid var(--border-gold); border-radius: 12px;
+    padding: 1.5rem; display: none; z-index: 2001;
 }
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
+.modal-close-btn { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
 
-/* ==================== 手機版響應式優化 ==================== */
+/* ==================== 手機版優化 ==================== */
 @media (max-width: 768px) {
-    .hero-section h1 {
-        font-size: 1.8rem;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-        margin: 2rem 0 1rem;
-    }
-
-    .day-selector {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #map {
-        height: 350px;
-    }
-
-    .float-btn {
-        min-width: 90px;
-        padding: 8px 12px;
-        font-size: 0.75rem;
-        right: 12px;
-    }
-
-    /* 調整手機版按鈕位置，避免擠壓 */
+    .hero-section h1 { font-size: 1.8rem; }
+    .section-title { font-size: 1.3rem; margin: 2rem 0 1rem; }
+    .day-selector { grid-template-columns: repeat(2, 1fr); }
+    .float-btn { min-width: 90px; padding: 8px 12px; font-size: 0.75rem; right: 10px; }
     .tools-btn-pos { bottom: 15px; }
     .coupon-btn-pos { bottom: 70px; }
     .itinerary-btn-pos { bottom: 125px; }
-
-    /* 修正地圖標記縮放 */
-    .leaflet-marker-icon {
-        transform: scale(0.85) !important;
-    }
+    .leaflet-marker-icon { transform: scale(0.85) !important; }
 }
