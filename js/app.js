@@ -19,6 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
     initMap();
     renderDaySelector();
     
+    // 設置初始背景圖
+    const heroSection = document.querySelector('.hero-section');
+    if (typeof itineraryData !== 'undefined' && itineraryData[1]) {
+        const day1Data = itineraryData[1];
+        if (day1Data.bgImage && heroSection) {
+            heroSection.style.backgroundImage = `url('${day1Data.bgImage}')`;
+        }
+    }
+    
+    // 添加永久標記
     if (typeof supermarkets !== 'undefined') addPermanentMarkers(supermarkets, '#6ba985', '🛒', supermarketMarkers);
     if (typeof shoppingStores !== 'undefined') addPermanentMarkers(shoppingStores, '#c9a961', '🛍️', shoppingMarkers);
     if (typeof souvenirStores !== 'undefined') addPermanentMarkers(souvenirStores, '#daa65f', '🎁', souvenirMarkers);
@@ -42,7 +52,9 @@ function showDay(day) {
     const dayData = itineraryData[day];
     
     const hero = document.querySelector('.hero-section');
-    if (hero && dayData.bgImage) hero.style.backgroundImage = `url('${dayData.bgImage}')`;
+    if (hero && dayData.bgImage) {
+        hero.style.backgroundImage = `url('${dayData.bgImage}')`;
+    }
     
     renderItinerary(dayData);
     addMapMarkers(dayData);
