@@ -56,6 +56,68 @@
                 </div>
                 <div id="permanent-stores-list" class="permanent-stores-list"></div>
             </div>
+
+            <div class="info-card transport-card" id="transport-section">
+                <h3>🚌 交通資訊</h3>
+                
+                <div class="transport-item">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">🚄 仙台空港 Access 線</h4>
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <p>單程 ¥660 (IC卡可用)</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>⏰ 時間</strong>
+                            <p>約 25 分鐘 (快速 17 分)</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>📍 路線</strong>
+                            <p>仙台空港 ⇔ 仙台站</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transport-divider"></div>
+
+                <div class="transport-item">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">🚌 Loople 仙台觀光巴士</h4>
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <p>一日券 ¥630 / 單次 ¥260</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>⏰ 運行</strong>
+                            <p>09:00 - 16:00 (每20分一班)</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>📍 景點</strong>
+                            <p>瑞鳳殿、仙台城跡、大崎八幡宮</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transport-divider"></div>
+
+                <div class="transport-item">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">⛵ 松島灣觀光船</h4>
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <p>仁王丸航線 ¥1,500</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>⏰ 時間</strong>
+                            <p>約 50 分鐘環島一周</p>
+                        </div>
+                        <div class="transport-detail">
+                            <strong>📍 碼頭</strong>
+                            <p>松島海岸站步行 5 分鐘</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -99,6 +161,7 @@
 
     <button class="float-btn tools-btn-pos" onclick="toggleToolsPanel()">📱 工具</button>
     <button class="float-btn coupon-btn-pos" onclick="openCouponModal()">🎟️ 優惠券</button>
+    <a href="#transport-section" class="float-btn transport-btn-pos">🚌 交通</a>
     <a href="#itinerary-container" class="float-btn itinerary-btn-pos">📅 行程</a>
 
     <div id="coupon-overlay" class="modal-overlay" onclick="closeCouponModal()"></div>
