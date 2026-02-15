@@ -10,7 +10,8 @@ let currentCategory = 'all';
 let currentMealType = 'all';
 
 // 工具函數
-function getSafeMapUrl(name) {
+function getSafeMapUrl(name, customUrl) {
+    if (customUrl) return customUrl;
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
 }
 
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof supermarkets !== 'undefined') addPermanentMarkers(supermarkets, '#6ba985', '🛒', supermarketMarkers);
     if (typeof shoppingStores !== 'undefined') addPermanentMarkers(shoppingStores, '#c9a961', '🛍️', shoppingMarkers);
     if (typeof souvenirStores !== 'undefined') addPermanentMarkers(souvenirStores, '#daa65f', '🎁', souvenirMarkers);
+    if (typeof restaurants !== 'undefined') addPermanentMarkers(restaurants, '#d47474', '🍽️', restaurantMarkers);
     
     showDay(1);
     
@@ -168,11 +170,12 @@ function addPermanentMarkers(data, color, char, markerArray) {
 }
 
 function createStorePopup(item, color) {
+    const googleMapsUrl = getSafeMapUrl(item.name, item.url);
     return `
         <div style="min-width:200px;">
             <h4 style="color:${color};margin-bottom:5px;">${item.name}</h4>
             <p style="font-size:13px;margin:5px 0;">${item.desc}</p>
-            <a href="${getSafeMapUrl(item.name)}" target="_blank" style="display:block;background:${color};color:white;text-align:center;padding:8px;border-radius:5px;text-decoration:none;margin-top:10px;">🗺️ Google 地圖</a>
+            <a href="${googleMapsUrl}" target="_blank" style="display:block;background:${color};color:white;text-align:center;padding:8px;border-radius:5px;text-decoration:none;margin-top:10px;">🗺️ Google 地圖</a>
         </div>
     `;
 }
@@ -226,9 +229,110 @@ function closeRestaurantOptions() {
 }
 
 function focusOnStoreByCoords(lat, lng, name) {
-    map.setView([lat, lng], 17);
-    closeRestaurantOptions();
-    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+    if (map) {
+        map.setView([lat, lng], 17);
+        
+        // 找到對應的標記並打開彈出窗口
+        const allMarkers = [...supermarketMarkers, ...shoppingMarkers, ...souvenirMarkers, ...restaurantMarkers, ...markers];
+        
+        allMarkers.forEach(marker => {
+            const mLatLng = marker.getLatLng();
+            // 簡單比對經緯度
+            if (Math.abs(mLatLng.lat - lat) < 0.0001 && Math.abs(mLatLng.lng - lng) < 0.0001) {
+                marker.openPopup();
+            }
+        });
+        
+        // 滾動到地圖
+        document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function showPermanentStores(type) {
+    const listContainer = document.getElementById('permanent-stores-list');
+    const buttons = document.querySelectorAll('.store-filter-btn');
+    
+    // 更新按鈕狀態
+    buttons.forEach(btn => {
+        if (btn.dataset.type === type) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // 收集要顯示的店家
+    let stores = [];
+    
+    if (type === 'all' || type === 'supermarket') {
+        if (typeof supermarkets !== 'undefined') {
+            supermarkets.forEach(store => stores.push({...store, icon: '🛒', type: '超市'}));
+        }
+    }
+    
+    if (type === 'all' || type === 'shopping') {
+        if (typeof shoppingStores !== 'undefined') {
+            shoppingStores.forEach(store => stores.push({...store, icon: '🛍️', type: '購物店'}));
+        }
+    }
+    
+    if (type === 'all' || type === 'souvenir') {
+        if (typeof souvenirStores !== 'undefined') {
+            souvenirStores.forEach(store => stores.push({...store, icon: '🎁', type: '伴手禮'}));
+        }
+    }
+    
+    if (type === 'all' || type === 'restaurant') {
+        if (typeof restaurants !== 'undefined') {
+            restaurants.forEach(store => stores.push({...store, icon: '🍽️', type: '餐廳'}));
+        }
+    }
+    
+    // 生成 HTML
+    if (stores.length === 0) {
+        listContainer.innerHTML = '<div style="text-align: center; color: var(--text-gray); padding: 2rem;">沒有店家資料</div>';
+        listContainer.classList.remove('hidden');
+        return;
+    }
+    
+    let html = '<div class="stores-grid">';
+    
+    stores.forEach(store => {
+        const googleMapsUrl = getSafeMapUrl(store.name, store.url);
+        
+        html += `
+            <div class="store-item">
+                <div class="store-item-header">
+                    <span class="store-icon">${store.icon}</span>
+                    <h4 class="store-name">${store.name}</h4>
+                </div>
+                <div class="store-type-badge">${store.type}</div>
+                <div class="store-desc">${store.desc}</div>
+                ${store.hours ? `<div style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">⏰ ${store.hours}</div>` : ''}
+                <div class="store-tags">
+                    ${store.tags.map(tag => `<span class="store-tag">${tag}</span>`).join('')}
+                </div>
+                <div class="store-actions">
+                    <button class="store-map-btn" onclick="focusOnStoreByCoords(${store.coords[0]}, ${store.coords[1]}, '${store.name}')">
+                        📍 在地圖上查看
+                    </button>
+                    <a href="${googleMapsUrl}" target="_blank" class="store-google-btn" onclick="event.stopPropagation();">
+                        🗺️ Google 地圖
+                    </a>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    
+    listContainer.innerHTML = html;
+    listContainer.classList.remove('hidden');
+    
+    // 滾動到清單位置
+    if (stores.length > 0) {
+        listContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 function toggleToolsPanel() {
