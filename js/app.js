@@ -75,6 +75,23 @@ function renderItinerary(dayData) {
         </div>
     `;
 
+    // 顯示旅館資訊（如果有）
+    if (dayData.hotel) {
+        html += `
+            <div class="hotel-card-inline fade-in" style="background: var(--bg-card-light); padding: 1.5rem; margin: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-gold);">
+                <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem;">🏨 今晚住宿</h4>
+                <div style="font-weight: 700; font-size: 1.1rem; margin: 0.5rem 0; color: var(--text-light);">${dayData.hotel.name}</div>
+                <div style="color: var(--text-gray); margin-bottom: 0.5rem;">
+                    📍 ${dayData.hotel.location} | Check-in: ${dayData.hotel.checkIn}
+                    ${dayData.hotel.dates ? `<br>📅 住宿期間: ${dayData.hotel.dates}` : ''}
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem;">
+                    ${dayData.hotel.features.map(f => `<div style="font-size: 0.85rem; color: var(--text-gray);">${f}</div>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+
     // 智慧型時段按鈕
     const dayMealTypes = new Set(['all']);
     dayData.locations.forEach(loc => { if (loc.mealType) dayMealTypes.add(loc.mealType); });
