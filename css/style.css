@@ -1,4 +1,4 @@
-/* ==================== 核心變數 ==================== */
+/* ==================== CSS Variables ==================== */
 :root {
     --primary: #d4a574;
     --primary-dark: #b8935f;
@@ -6,145 +6,539 @@
     --bg-dark: #0a0a0a;
     --bg-card: #1a1a1a;
     --bg-card-light: #252525;
-    --bg-cream: #1a1a1a; /* 修復：補齊遺失變數 */
     --text-light: #ffffff;
     --text-gold: #d4a574;
     --text-gray: #a0a0a0;
     --border-gold: #d4a574;
     --shadow-gold: rgba(212, 165, 116, 0.3);
     --shadow-dark: rgba(0, 0, 0, 0.8);
-    
-    --cat-attraction: #d4a574;
-    --cat-restaurant: #e6b87d;
-    --cat-shopping: #c9a961;
-    --cat-specialty: #daa65f;
-    --cat-market: #b8935f;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { 
-    font-family: 'Noto Sans TC', sans-serif; 
-    background: var(--bg-dark); 
-    color: var(--text-light); 
-    line-height: 1.6; 
-    overflow-x: hidden; 
+/* ==================== Reset ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* ==================== Hero & 共用樣式 ==================== */
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ==================== Hero Section ==================== */
 .hero-section {
-    position: relative; height: 400px;
-    background: linear-gradient(135deg, #000, #1a1a1a); /* 圖片防呆預設色 */
-    background-size: cover; background-position: center;
-    display: flex; align-items: center; justify-content: center;
-    border-bottom: 2px solid var(--border-gold); transition: background-image 0.5s ease;
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.6s ease;
+    border-bottom: 2px solid var(--border-gold);
 }
-.hero-overlay { z-index: 2; text-align: center; background: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px; }
-.hero-section h1 { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #f4d03f, #d4a574); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero-subtitle { letter-spacing: 3px; color: var(--text-gray); font-size: 0.9rem; }
-.hero-dates { margin-top: 10px; color: var(--primary); font-weight: bold; }
 
-.container { max-width: 900px; margin: 0 auto; padding: 1rem; }
-.section-title { font-size: 1.6rem; color: var(--primary); text-align: center; margin: 2.5rem 0 1.5rem; letter-spacing: 1px; border-bottom: 1px solid var(--border-gold); display: inline-block; padding-bottom: 5px; width: 100%; }
-.route-overview { background: var(--bg-card); padding: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-gold); }
-.route-path { color: var(--text-gold); font-weight: bold; letter-spacing: 1px; margin-top: 10px; }
-
-/* ==================== 地圖 & 天數 ==================== */
-.map-container { border: 1px solid var(--border-gold); border-radius: 12px; overflow: hidden; }
-#map { width: 100%; height: 400px; }
-.day-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 2rem; }
-.day-card { background: var(--bg-card); border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-.day-card.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-color: var(--accent-gold); color: var(--bg-dark); }
-.day-label { font-size: 0.8rem; opacity: 0.8; }
-.day-date { font-weight: bold; font-size: 1.1rem; }
-
-/* ==================== 行程 & 篩選 ==================== */
-.meal-filters { display: flex; gap: 10px; padding: 1rem; overflow-x: auto; justify-content: center; }
-.meal-btn { padding: 6px 14px; background: var(--bg-card-light); border: 1px solid var(--border-gold); color: var(--text-gray); border-radius: 20px; white-space: nowrap; cursor: pointer; }
-.meal-btn.active { background: var(--primary); color: var(--bg-dark); font-weight: bold; }
-
-.timeline { padding: 10px; }
-.timeline-item { display: flex; gap: 15px; margin-bottom: 20px; position: relative; }
-.timeline-dot { width: 25px; height: 25px; background: var(--primary); color: var(--bg-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; z-index: 2; flex-shrink: 0; }
-.timeline-time { font-weight: bold; color: var(--primary); width: 50px; flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
-.timeline-content { background: var(--bg-card-light) !important; border-left: 3px solid var(--accent-gold); padding: 1rem; border-radius: 8px; flex-grow: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.timeline-title { font-weight: bold; color: var(--text-light); margin-bottom: 5px; }
-.timeline-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 8px; }
-.tag { background: #333; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 5px; color: var(--text-gold); }
-.option-badge { background: rgba(212, 165, 116, 0.2); color: var(--accent-gold); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-left: 5px; }
-
-/* 飯店資訊卡 */
-.hotel-card-inline { background: var(--bg-card-light); padding: 15px; border-radius: 12px; margin: 15px; border: 1px solid var(--border-gold); }
-.hotel-card-inline img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: #333; }
-.hotel-features { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
-.hotel-feature { font-size: 0.8rem; color: var(--text-gray); background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; }
-
-/* ==================== 資訊卡與工具 ==================== */
-.info-card { background: var(--bg-card); border: 1px solid var(--border-gold); padding: 20px; border-radius: 12px; margin-bottom: 30px; }
-.info-card h3 { color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
-
-/* 交通卡片樣式 (修復) */
-.transport-item { margin-bottom: 15px; }
-.transport-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--bg-card-light); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent-gold); }
-.transport-detail strong { display: block; color: var(--text-gray); font-size: 0.8rem; }
-.transport-detail p { margin: 0; font-size: 0.9rem; }
-.transport-divider { height: 1px; background: #333; margin: 15px 0; }
-
-/* 店家篩選按鈕 */
-.store-filter-btn { padding: 5px 10px; background: var(--bg-card-light); border: 1px solid #444; color: var(--text-gray); cursor: pointer; margin-right: 5px; margin-bottom: 5px; border-radius: 5px; }
-.store-filter-btn.active { background: var(--primary); color: var(--bg-dark); font-weight: bold; }
-.stores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
-
-/* 工具面板樣式 (修復連結顏色) */
-.tools-panel { position: fixed; bottom: -100%; left: 0; right: 0; background: var(--bg-card); border-top: 3px solid var(--border-gold); transition: 0.4s ease; z-index: 1001; max-height: 70vh; overflow-y: auto; }
-.tools-panel.active { bottom: 0; }
-.tools-header { padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-.tools-close-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
-.tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
-.tool-card { 
-    background: var(--bg-card-light); border: 1px solid var(--border-gold); border-radius: 12px; padding: 1.2rem; 
-    text-align: center; text-decoration: none !important; color: var(--text-light) !important; 
-    display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s; 
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
 }
-.tool-card:hover { border-color: var(--accent-gold); transform: translateY(-3px); box-shadow: 0 5px 15px var(--shadow-gold); }
-.tool-icon { font-size: 2rem; }
-.tool-name { font-weight: bold; color: var(--primary); font-size: 1rem; }
-.tool-desc { font-size: 0.8rem; color: var(--text-gray); }
 
-/* ==================== 浮動按鈕與彈窗 ==================== */
-.float-btn { position: fixed; right: 20px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--bg-dark); border: 2px solid var(--accent-gold); border-radius: 50px; padding: 10px 20px; font-weight: bold; z-index: 1000; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
-.tools-btn-pos { bottom: 20px; }
-.transport-btn-pos { bottom: 80px; } /* 新增交通按鈕位置 */
-.coupon-btn-pos { bottom: 140px; }
-.itinerary-btn-pos { bottom: 200px; }
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
 
-/* 方案選擇面板 */
-.restaurant-options-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 90%; max-width: 500px; background: var(--bg-card); border: 2px solid var(--border-gold); border-radius: 16px; z-index: 2005; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px; max-height: 80vh; overflow-y: auto; }
-.restaurant-options-panel.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-.restaurant-options-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
-.restaurant-options-close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-.restaurant-option-card, .store-item { background: var(--bg-card-light); border: 1px solid var(--border-gold); padding: 15px; border-radius: 10px; margin-bottom: 12px; }
+.hero-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
 
-/* 優惠券彈窗 */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 2000; }
-.modal-content { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 400px; background: var(--bg-card); border: 2px solid var(--border-gold); border-radius: 12px; padding: 1.5rem; display: none; z-index: 2001; }
-.modal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
-.modal-close-btn { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
+.hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
 
-/* ==================== 手機版優化 ==================== */
+.hero-dates {
+    font-size: 1.2rem;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* ==================== Container ==================== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ==================== Map Section ==================== */
+.map-section {
+    margin-bottom: 3rem;
+}
+
+.map-container {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px var(--shadow-dark);
+    border: 1px solid var(--border-gold);
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+/* ==================== Section Title ==================== */
+.section-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* ==================== Day Selector ==================== */
+.day-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.day-card {
+    background: var(--bg-card);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-gold);
+    border-color: var(--primary);
+}
+
+.day-card.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border-color: var(--accent-gold);
+    box-shadow: 0 6px 20px var(--shadow-gold);
+}
+
+.day-label {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.day-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== Itinerary Container ==================== */
+#itinerary-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 6px 25px var(--shadow-dark);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid var(--border-gold);
+}
+
+/* ==================== Day Header ==================== */
+.day-header {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+    color: var(--text-light);
+    padding: 2rem;
+    position: relative;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.day-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.day-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+/* ==================== Meal Filters ==================== */
+.meal-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: var(--bg-card-light);
+    border-bottom: 2px solid #333;
+    justify-content: center;
+}
+
+.meal-btn {
+    padding: 0.7rem 1.8rem;
+    border: none;
+    background: var(--bg-card);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    border: 2px solid #444;
+}
+
+.meal-btn:hover {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border-color: var(--primary);
+}
+
+.meal-btn.active {
+    background: var(--primary-dark);
+    color: white;
+    border-color: var(--accent-gold);
+}
+
+/* ==================== Timeline ==================== */
+.timeline {
+    position: relative;
+    padding: 2rem 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 4rem;
+    margin-bottom: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    z-index: 2;
+}
+
+.timeline-time {
+    background: var(--text-gray);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-content {
+    background: var(--bg-card-light);
+    padding: 1.2rem;
+    border-radius: 12px;
+    border-left: 3px solid var(--primary);
+}
+
+.timeline-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: var(--bg-card);
+    color: var(--text-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid #444;
+}
+
+/* ==================== Float Buttons ==================== */
+.float-btn {
+    position: fixed;
+    right: 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--bg-dark);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50px;
+    padding: 12px 24px;
+    min-width: 120px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 6px 20px var(--shadow-gold);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.float-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-gold);
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary) 100%);
+}
+
+.itinerary-btn-pos { bottom: 20px; }
+.coupon-btn-pos { bottom: 80px; }
+.transport-btn-pos { bottom: 140px; }
+
+/* ==================== Modal ==================== */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.8); 
+    display: none; 
+    z-index: 2000; 
+}
+
+.modal-content {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 85%; 
+    max-width: 400px; 
+    background: var(--bg-card);
+    border: 2px solid var(--border-gold); 
+    border-radius: 12px;
+    padding: 1.5rem; 
+    display: none; 
+    z-index: 2001;
+}
+
+.modal-header { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 1rem; 
+    border-bottom: 1px solid #444; 
+    padding-bottom: 0.5rem; 
+}
+
+.modal-close-btn { 
+    background: none; 
+    border: none; 
+    color: white; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+}
+
+/* ==================== Animations ==================== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== 手機版響應式優化 ==================== */
 @media (max-width: 768px) {
-    .hero-section h1 { font-size: 1.8rem; }
-    .section-title { font-size: 1.3rem; margin: 2rem 0 1rem; }
-    .day-selector { grid-template-columns: repeat(2, 1fr); }
-    .float-btn { min-width: 90px; padding: 8px 12px; font-size: 0.75rem; right: 10px; }
+    .hero-section h1 { 
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
     
-    .tools-btn-pos { bottom: 15px; }
-    .transport-btn-pos { bottom: 65px; }
-    .coupon-btn-pos { bottom: 115px; }
-    .itinerary-btn-pos { bottom: 165px; }
+    .section-title { 
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        margin: 2rem 0 1rem; 
+    }
+    
+    .day-selector { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    .float-btn { 
+        min-width: 100px; 
+        padding: 8px 14px; 
+        font-size: 0.75rem; 
+        right: 10px; 
+    }
+    
+    .itinerary-btn-pos { bottom: 15px; }
+    .coupon-btn-pos { bottom: 65px; }
+    .transport-btn-pos { bottom: 115px; }
 
-    .leaflet-marker-icon { transform: scale(0.85) !important; }
+    .leaflet-marker-icon { 
+        transform: scale(0.85) !important; 
+    }
     
-    .transport-grid { grid-template-columns: 1fr; gap: 5px; }
-    .transport-detail { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; }
-    .transport-detail strong { width: 60px; }
+    #map {
+        height: 350px;
+    }
+    
+    .timeline {
+        padding-left: 1rem;
+    }
+    
+    .timeline-item {
+        padding-left: 3.5rem;
+    }
+    
+    .timeline-dot {
+        left: 0;
+    }
+    
+    .meal-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+}
+
+/* ==================== Restaurant Options Panel ==================== */
+.restaurant-options-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 3000;
+}
+
+.restaurant-options-overlay.active {
+    display: block;
+}
+
+.restaurant-options-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    display: none;
+    overflow-y: auto;
+    z-index: 3001;
+    border: 2px solid var(--border-gold);
+}
+
+.restaurant-options-panel.active {
+    display: block;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #444;
+}
+
+.panel-header h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+.close-panel-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
 }
