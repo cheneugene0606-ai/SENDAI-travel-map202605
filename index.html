@@ -43,6 +43,165 @@
         <div id="itinerary-container">
             <!-- 動態生成內容 -->
         </div>
+
+        <!-- 旅行資訊 -->
+        <div class="info-section">
+            <h2 class="section-title">📋 旅行資訊</h2>
+            
+            <!-- 航班資訊 -->
+            <div class="info-card flight-card">
+                <h3>✈️ 航班資訊</h3>
+                <div class="flight-item">
+                    <div class="flight-label">去程</div>
+                    <div class="flight-detail">
+                        <strong>星宇航空 JX862</strong><br>
+                        5/20 (三) 11:35 台北 TPE → 16:00 仙台 SDJ
+                    </div>
+                </div>
+                <div class="flight-item">
+                    <div class="flight-label">回程</div>
+                    <div class="flight-detail">
+                        <strong>星宇航空 JX863</strong><br>
+                        5/26 (二) 17:20 仙台 SDJ → 20:10 台北 TPE
+                    </div>
+                </div>
+            </div>
+
+            <!-- 住宿資訊 -->
+            <div class="info-card hotel-card">
+                <h3>🏨 住宿資訊</h3>
+                <div class="hotel-item-detail">
+                    <img src="images/hotel1.jpg" alt="Daiwa Roynet Hotel Sendai Nishiguchi PREMIER" class="hotel-image" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 0.8rem;">
+                    <div class="hotel-name">Daiwa Roynet Hotel Sendai Nishiguchi PREMIER</div>
+                    <div class="hotel-location">📍 仙台西口</div>
+                    <div class="hotel-dates">入住：5/20 14:00 | 退房：5/23 11:00 (3晚)</div>
+                </div>
+                <div class="hotel-item-detail">
+                    <img src="images/hotel2.jpg" alt="Daiwa Roynet Hotel Sendai Ichibancho PREMIER" class="hotel-image" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 0.8rem;">
+                    <div class="hotel-name">Daiwa Roynet Hotel Sendai Ichibancho PREMIER</div>
+                    <div class="hotel-location">📍 仙台一番町</div>
+                    <div class="hotel-dates">入住：5/23 14:00 | 退房：5/26 11:00 (3晚)</div>
+                </div>
+            </div>
+
+            <!-- 永久店家區塊 -->
+            <div class="info-card stores-card">
+                <h3>🛍️ 永久店家清單</h3>
+                <p style="text-align: center; color: var(--text-gray); margin-bottom: 1.5rem;">
+                    點擊按鈕查看超市、購物店、伴手禮店完整清單
+                </p>
+                
+                <!-- 永久店家篩選按鈕 -->
+                <div class="permanent-stores-filter">
+                    <button class="store-filter-btn active" data-type="all" onclick="showPermanentStores('all')">📍 全部店家 (53)</button>
+                    <button class="store-filter-btn" data-type="supermarket" onclick="showPermanentStores('supermarket')">🛒 超市 (6)</button>
+                    <button class="store-filter-btn" data-type="shopping" onclick="showPermanentStores('shopping')">🛍️ 購物店 (13)</button>
+                    <button class="store-filter-btn" data-type="souvenir" onclick="showPermanentStores('souvenir')">🎁 伴手禮 (16)</button>
+                    <button class="store-filter-btn" data-type="restaurant" onclick="showPermanentStores('restaurant')">🍽️ 餐廳 (18)</button>
+                </div>
+
+                <!-- 永久店家清單 -->
+                <div id="permanent-stores-list" class="permanent-stores-list"></div>
+            </div>
+
+            <!-- 交通資訊 -->
+            <div class="info-card transport-card" id="transport-section">
+                <h3>🚌 交通資訊</h3>
+                
+                <div class="transport-section">
+                    <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.8rem;">🚄 仙台空港 Access 線</h4>
+                    <img src="images/sendai-airport-access-map.jpg" alt="仙台空港 Access 線路線圖" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                    
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <span>仙台空港 ⇔ 仙台站：¥660（約25分鐘）<br>可使用 Suica、PASMO 等 IC 卡</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>⏰ 運行時間</strong>
+                            <span>首班車：6:13（機場發）<br>末班車：22:53（機場發）<br>班次：每15-30分鐘一班</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>🎯 主要停靠站</strong>
+                            <span>仙台空港 → 名取（7分鐘）→ 館腰 → 岩沼 → 仙台站<br>快速：17分鐘 | 普通：25分鐘</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>🚉 機場搭乘方式</strong>
+                            <span>📍 從 2F 穿過『國內航班櫃台』<br>🌉 對面的空橋即到搭乘處<br>✅ 指標清楚，容易找到</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-card-light); padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 3px solid var(--accent-gold);">
+                        <strong style="color: var(--primary);">💡 使用時機：</strong>
+                        <p style="color: var(--text-gray); margin: 0.5rem 0 0 0;">
+                            <strong>Day 1：</strong>機場到仙台站（抵達日使用）<br>
+                            <strong>Day 7：</strong>採用包車服務直達機場（更便利）
+                        </p>
+                    </div>
+                </div>
+
+                <div class="transport-divider"></div>
+                
+                <div class="transport-section">
+                    <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.8rem;">🚌 るーぷる仙台（Loople Sendai）觀光巴士</h4>
+                    <img src="images/loople-map.jpg" alt="Loople 仙台觀光巴士路線圖" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                    
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <span>單次：成人 ¥260、兒童 ¥130<br>一日券：成人 ¥630、兒童 ¥320</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>⏰ 運行時間</strong>
+                            <span>平日：9:00-16:00（每30分鐘一班）<br>週末假日：9:00-16:00（每20分鐘一班）</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>🎯 主要停靠站</strong>
+                            <span>仙台站→瑞鳳殿→博物館→仙台城跡→大崎八幡宮→仙台站</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>✨ 推薦用途</strong>
+                            <span>適用於 Day 5 歷史巡禮路線<br>一日券可無限次上下車</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transport-divider"></div>
+
+                <div class="transport-section">
+                    <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.8rem;">⛵ 松島灣環島觀光船</h4>
+                    <img src="images/matsushima-cruise-map.png" alt="松島灣觀光船路線圖" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                    
+                    <div class="transport-grid">
+                        <div class="transport-detail">
+                            <strong>💰 票價</strong>
+                            <span>仁王丸航線（50分鐘）：成人 ¥1,500<br>大型觀光船（50分鐘）：成人 ¥1,500<br>兒童半價</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>⏰ 運行時間</strong>
+                            <span>首班：9:00<br>末班：15:00（冬季）/ 16:00（夏季）<br>班次：每30分鐘至1小時一班</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>🎯 搭乘地點</strong>
+                            <span>松島海岸站步行7分鐘<br>兩家公司可選：丸文松島汽船、松島島巡り観光船</span>
+                        </div>
+                        
+                        <div class="transport-detail">
+                            <strong>✨ 使用時機</strong>
+                            <span>Day 3 松島行程必搭<br>近距離欣賞松島灣 260+ 座島嶼</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Restaurant Options Panel -->
@@ -90,7 +249,7 @@
     <!-- Floating Buttons -->
     <a href="#itinerary-container" class="float-btn itinerary-btn-pos">📅 行程</a>
     <button class="float-btn coupon-btn-pos" onclick="openCouponModal()">🎟️ 優惠券</button>
-    <a href="#map" class="float-btn transport-btn-pos">🚌 交通</a>
+    <a href="#transport-section" class="float-btn transport-btn-pos">🚌 交通</a>
     <button class="float-btn tools-btn-pos" onclick="toggleToolsPanel()">📱 工具</button>
 
     <!-- Coupon Modal -->
