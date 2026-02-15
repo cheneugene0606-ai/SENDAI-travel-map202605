@@ -3,128 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 仙台七日深度探險 | Sendai Travel Map</title>
+    <title>2026仙台七日旅遊規劃</title>
+    
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-overlay">
-            <h1>2026 仙台七日深度探險</h1>
-            <p class="hero-subtitle">Sendai Travel Map</p>
-            <div class="hero-dates">
-                <span>05.20 — 05.26</span>
-                <span class="hero-divider">◆</span>
-                <span>7天6夜</span>
-            </div>
+            <h1>🗾 仙台七日旅遊規劃</h1>
+            <p class="hero-subtitle">SENDAI TRAVEL 2026</p>
+            <p class="hero-dates">2026年5月20日 - 5月26日</p>
         </div>
     </div>
 
-    <div class="route-overview">
-        <h2 class="route-title">◆ 旅行路線總覽 ◆</h2>
-        <div class="route-path">
-            仙台 → 松島 → 仙台港 → 鹽竈 → 仙台
-        </div>
-    </div>
-
+    <!-- Main Container -->
     <div class="container">
+        <!-- Day Selector -->
+        <h2 class="section-title">📍 每日行程</h2>
+        <div class="day-selector" id="day-selector"></div>
+
+        <!-- Map Section -->
         <div class="map-section">
-            <h2 class="section-title">📍 每日行程地圖</h2>
             <div class="map-container">
                 <div id="map"></div>
             </div>
         </div>
 
-        <h2 class="section-title">每日行程詳情</h2>
-        <div class="day-selector" id="day-selector">
-            </div>
-
+        <!-- Itinerary Container -->
         <div id="itinerary-container">
-            </div>
-
-        <div class="info-section">
-            <h2 class="section-title">旅行資訊</h2>
-            
-            <div class="info-card stores-card">
-                <h3>🛍️ 永久店家清單</h3>
-                <div class="permanent-stores-filter">
-                    <button class="store-filter-btn active" data-type="all" onclick="showPermanentStores('all')">📍 全部</button>
-                    <button class="store-filter-btn" data-type="supermarket" onclick="showPermanentStores('supermarket')">🛒 超市</button>
-                    <button class="store-filter-btn" data-type="shopping" onclick="showPermanentStores('shopping')">🛍️ 購物</button>
-                    <button class="store-filter-btn" data-type="souvenir" onclick="showPermanentStores('souvenir')">🎁 伴手禮</button>
-                </div>
-                <div id="permanent-stores-list" class="permanent-stores-list"></div>
-            </div>
-
-            <div class="info-card transport-card" id="transport-section">
-                <h3>🚌 交通資訊</h3>
-                
-                <div class="transport-item">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">🚄 仙台空港 Access 線</h4>
-                    <div class="transport-grid">
-                        <div class="transport-detail"><strong>💰 票價</strong><p>¥660 (可用IC卡)</p></div>
-                        <div class="transport-detail"><strong>⏰ 時間</strong><p>約 25 分鐘</p></div>
-                        <div class="transport-detail"><strong>📍 路線</strong><p>機場 ⇔ 仙台站</p></div>
-                    </div>
-                </div>
-                <div class="transport-divider"></div>
-                <div class="transport-item">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">🚌 Loople 仙台觀光巴士</h4>
-                    <div class="transport-grid">
-                        <div class="transport-detail"><strong>💰 票價</strong><p>一日券 ¥630</p></div>
-                        <div class="transport-detail"><strong>⏰ 運行</strong><p>09:00 - 16:00</p></div>
-                        <div class="transport-detail"><strong>📍 景點</strong><p>瑞鳳殿、城跡</p></div>
-                    </div>
-                </div>
-                <div class="transport-divider"></div>
-                <div class="transport-item">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">⛵ 松島灣觀光船</h4>
-                    <div class="transport-grid">
-                        <div class="transport-detail"><strong>💰 票價</strong><p>¥1,500</p></div>
-                        <div class="transport-detail"><strong>⏰ 時間</strong><p>約 50 分鐘</p></div>
-                        <div class="transport-detail"><strong>📍 碼頭</strong><p>海岸站走5分</p></div>
-                    </div>
-                </div>
-            </div>
+            <!-- 動態生成內容 -->
         </div>
     </div>
 
-    <div id="restaurant-options-overlay" class="restaurant-options-overlay" onclick="closeRestaurantOptions()"></div>
-    <div id="restaurant-options-panel" class="restaurant-options-panel">
-        <div class="restaurant-options-header">
+    <!-- Restaurant Options Panel -->
+    <div class="restaurant-options-overlay" id="restaurant-options-overlay" onclick="closeRestaurantOptions()"></div>
+    <div class="restaurant-options-panel" id="restaurant-options-panel">
+        <div class="panel-header">
             <h3 id="restaurant-options-title">方案選擇</h3>
-            <button class="restaurant-options-close-btn" onclick="closeRestaurantOptions()">✕</button>
+            <button class="close-panel-btn" onclick="closeRestaurantOptions()">✕</button>
         </div>
-        <div id="restaurant-options-content" class="restaurant-options-content"></div>
-    </div>
-
-    <div id="tools-panel" class="tools-panel">
-        <div class="tools-header">
-            <h3>🧳 旅行必備工具</h3>
-            <button class="tools-close-btn" onclick="toggleToolsPanel()">✕</button>
-        </div>
-        <div class="tools-grid">
-            <a href="https://play.google.com/store/apps/details?id=jp.go.nict.voicetra" target="_blank" class="tool-card">
-                <div class="tool-icon">🗣️</div><div class="tool-name">VoiceTra</div><div class="tool-desc">翻譯神器</div>
-            </a>
-            <a href="https://transit.yahoo.co.jp/smartphone/app/" target="_blank" class="tool-card">
-                <div class="tool-icon">🚇</div><div class="tool-name">乘換案內</div><div class="tool-desc">交通查詢</div>
-            </a>
-            <a href="https://japantravel.navitime.com/zh-tw/area/jp/route/" target="_blank" class="tool-card">
-                <div class="tool-icon">🌏</div><div class="tool-name">Japan Travel</div><div class="tool-desc">路線導航</div>
-            </a>
-            <a href="https://tenki.jp/forecast/2/7/" target="_blank" class="tool-card">
-                <div class="tool-icon">☀️</div><div class="tool-name">Tenki.jp</div><div class="tool-desc">天氣預報</div>
-            </a>
+        <div id="restaurant-options-content">
+            <!-- 動態生成選項 -->
         </div>
     </div>
 
-    <button class="float-btn tools-btn-pos" onclick="toggleToolsPanel()">📱 工具</button>
-    <button class="float-btn coupon-btn-pos" onclick="openCouponModal()">🎟️ 優惠券</button>
-    <a href="#transport-section" class="float-btn transport-btn-pos">🚌 交通</a>
+    <!-- Floating Buttons -->
     <a href="#itinerary-container" class="float-btn itinerary-btn-pos">📅 行程</a>
+    <button class="float-btn coupon-btn-pos" onclick="openCouponModal()">🎟️ 優惠券</button>
+    <a href="#map" class="float-btn transport-btn-pos">🚌 交通</a>
 
+    <!-- Coupon Modal -->
     <div id="coupon-overlay" class="modal-overlay" onclick="closeCouponModal()"></div>
     <div id="coupon-modal" class="modal-content">
         <div class="modal-header">
@@ -136,6 +74,7 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
