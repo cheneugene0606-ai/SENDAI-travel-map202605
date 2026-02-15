@@ -88,9 +88,11 @@ function renderItinerary(dayData) {
 
     // 顯示旅館資訊（如果有）
     if (dayData.hotel) {
+        const hotelImage = dayData.hotel.image ? `<img src="${dayData.hotel.image}" alt="${dayData.hotel.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 0.8rem;">` : '';
         html += `
             <div class="hotel-card-inline fade-in" style="background: var(--bg-card-light); padding: 1.5rem; margin: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent-gold);">
-                <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem;">🏨 今晚住宿</h4>
+                <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 0.8rem;">🏨 今晚住宿</h4>
+                ${hotelImage}
                 <div style="font-weight: 700; font-size: 1.1rem; margin: 0.5rem 0; color: var(--text-light);">${dayData.hotel.name}</div>
                 <div style="color: var(--text-gray); margin-bottom: 0.5rem;">
                     📍 ${dayData.hotel.location} | Check-in: ${dayData.hotel.checkIn}
