@@ -34,6 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof souvenirStores !== 'undefined') addPermanentMarkers(souvenirStores, '#daa65f', '🎁', souvenirMarkers);
     
     showDay(1);
+    
+    // 點擊外部關閉工具面板
+    document.addEventListener('click', function(event) {
+        const panel = document.getElementById('tools-panel');
+        const toolsBtn = document.querySelector('.tools-btn-pos');
+        if (panel && !panel.contains(event.target) && event.target !== toolsBtn) {
+            panel.classList.remove('active');
+        }
+    });
 });
 
 function initMap() {
@@ -220,6 +229,10 @@ function focusOnStoreByCoords(lat, lng, name) {
     map.setView([lat, lng], 17);
     closeRestaurantOptions();
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleToolsPanel() {
+    document.getElementById('tools-panel').classList.toggle('active');
 }
 
 function openCouponModal() {
