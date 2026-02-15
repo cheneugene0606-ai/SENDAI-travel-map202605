@@ -6,7 +6,7 @@
     --bg-dark: #0a0a0a;
     --bg-card: #1a1a1a;
     --bg-card-light: #252525;
-    --bg-cream: #1a1a1a; /* 修正：解決部分 UI 背景透明的問題 */
+    --bg-cream: #1a1a1a;
     --text-light: #ffffff;
     --text-gold: #d4a574;
     --text-gray: #a0a0a0;
@@ -83,7 +83,7 @@ body {
 .day-label { font-size: 0.8rem; opacity: 0.8; }
 .day-date { font-weight: bold; font-size: 1.1rem; }
 
-/* ==================== 行程列表與卡片 (框框修復) ==================== */
+/* ==================== 行程列表與卡片 ==================== */
 .meal-filters { display: flex; gap: 10px; padding: 1rem; overflow-x: auto; justify-content: center; }
 .meal-btn {
     padding: 6px 14px; background: var(--bg-card-light); border: 1px solid var(--border-gold);
@@ -100,7 +100,7 @@ body {
 }
 .timeline-time { font-weight: bold; color: var(--primary); width: 50px; flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
 .timeline-content {
-    background: var(--bg-card-light) !important; /* 確保背景色存在 */
+    background: var(--bg-card-light) !important;
     border-left: 3px solid var(--accent-gold);
     padding: 1rem; border-radius: 8px; flex-grow: 1;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
@@ -110,7 +110,23 @@ body {
 .tag { background: #333; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 5px; color: var(--text-gold); }
 .option-badge { background: rgba(212, 165, 116, 0.2); color: var(--accent-gold); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-left: 5px; }
 
-/* ==================== 旅行工具 UI 修復 (解決紫色連結問題) ==================== */
+/* ==================== 旅行工具與永久店家 UI ==================== */
+.info-card { background: var(--bg-card); border: 1px solid var(--border-gold); padding: 20px; border-radius: 12px; margin-bottom: 30px; }
+.info-card h3 { color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+
+/* 永久店家 */
+.store-filter-btn { padding: 5px 10px; background: var(--bg-card-light); border: 1px solid #444; color: var(--text-gray); cursor: pointer; margin-right: 5px; margin-bottom: 5px; border-radius: 5px; }
+.store-filter-btn.active { background: var(--primary); color: var(--bg-dark); font-weight: bold; }
+.stores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
+
+/* 交通資訊卡 (修復樣式) */
+.transport-item { margin-bottom: 15px; }
+.transport-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--bg-card-light); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent-gold); }
+.transport-detail strong { display: block; color: var(--text-gray); font-size: 0.8rem; }
+.transport-detail p { margin: 0; font-size: 0.9rem; }
+.transport-divider { height: 1px; background: #333; margin: 15px 0; }
+
+/* 旅行工具 */
 .tools-panel {
     position: fixed; bottom: -100%; left: 0; right: 0;
     background: var(--bg-card); border-top: 3px solid var(--border-gold);
@@ -120,19 +136,12 @@ body {
 .tools-header { padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
 .tools-close-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
 
-.tools-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); /* 雙欄排版 */
-    gap: 15px; padding: 20px;
-}
+.tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
 .tool-card {
-    background: var(--bg-card-light);
-    border: 1px solid var(--border-gold);
-    border-radius: 12px; padding: 1.2rem;
-    text-align: center;
-    text-decoration: none !important; /* 移除底線 */
-    color: var(--text-light) !important; /* 移除紫色 */
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    transition: 0.3s;
+    background: var(--bg-card-light); border: 1px solid var(--border-gold);
+    border-radius: 12px; padding: 1.2rem; text-align: center;
+    text-decoration: none !important; color: var(--text-light) !important;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s;
 }
 .tool-card:hover { border-color: var(--accent-gold); transform: translateY(-3px); box-shadow: 0 5px 15px var(--shadow-gold); }
 .tool-icon { font-size: 2rem; }
@@ -166,8 +175,9 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
 }
 .tools-btn-pos { bottom: 20px; }
-.coupon-btn-pos { bottom: 80px; }
-.itinerary-btn-pos { bottom: 140px; }
+.transport-btn-pos { bottom: 80px; }
+.coupon-btn-pos { bottom: 140px; }
+.itinerary-btn-pos { bottom: 200px; }
 
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 2000; }
 .modal-content {
@@ -179,14 +189,22 @@ body {
 .modal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
 .modal-close-btn { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
 
-/* ==================== 手機版優化 ==================== */
+/* ==================== 手機版響應式優化 ==================== */
 @media (max-width: 768px) {
     .hero-section h1 { font-size: 1.8rem; }
     .section-title { font-size: 1.3rem; margin: 2rem 0 1rem; }
     .day-selector { grid-template-columns: repeat(2, 1fr); }
     .float-btn { min-width: 90px; padding: 8px 12px; font-size: 0.75rem; right: 10px; }
+    
     .tools-btn-pos { bottom: 15px; }
-    .coupon-btn-pos { bottom: 70px; }
-    .itinerary-btn-pos { bottom: 125px; }
+    .transport-btn-pos { bottom: 65px; }
+    .coupon-btn-pos { bottom: 115px; }
+    .itinerary-btn-pos { bottom: 165px; }
+
     .leaflet-marker-icon { transform: scale(0.85) !important; }
+    
+    /* 交通資訊卡手機版調整 */
+    .transport-grid { grid-template-columns: 1fr; gap: 5px; }
+    .transport-detail { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; }
+    .transport-detail strong { width: 60px; }
 }
