@@ -558,6 +558,257 @@ body {
     font-size: 0.85rem;
 }
 
+/* ==================== Info Section ==================== */
+.info-section {
+    margin-top: 3rem;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 25px var(--shadow-dark);
+    border: 1px solid var(--border-gold);
+}
+
+.info-card h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+/* ==================== Flight Info ==================== */
+.flight-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #444;
+}
+
+.flight-item:last-child {
+    border-bottom: none;
+}
+
+.flight-label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.flight-detail {
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+/* ==================== Hotel Info ==================== */
+.hotel-item-detail {
+    padding: 1.5rem;
+    background: var(--bg-card-light);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.hotel-item-detail:last-child {
+    margin-bottom: 0;
+}
+
+.hotel-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.hotel-location {
+    color: var(--text-gray);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.hotel-dates {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* ==================== Permanent Stores ==================== */
+.permanent-stores-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.store-filter-btn {
+    padding: 0.7rem 1.5rem;
+    background: var(--bg-card-light);
+    color: var(--text-light);
+    border: 2px solid #444;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.store-filter-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.store-filter-btn.active {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border-color: var(--accent-gold);
+}
+
+.permanent-stores-list {
+    display: none;
+}
+
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.store-item {
+    background: var(--bg-card-light);
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.store-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px var(--shadow-gold);
+}
+
+.store-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.store-icon {
+    font-size: 1.5rem;
+}
+
+.store-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.store-type-badge {
+    display: inline-block;
+    background: var(--bg-card);
+    color: var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.store-desc {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.store-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.store-tag {
+    background: var(--bg-card);
+    color: var(--text-gray);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+.store-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.store-map-btn, .store-google-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.store-map-btn {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border: none;
+}
+
+.store-google-btn {
+    background: var(--bg-card);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    display: block;
+}
+
+.store-map-btn:hover, .store-google-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-gold);
+}
+
+/* ==================== Transport Info ==================== */
+.transport-section {
+    margin-bottom: 2rem;
+}
+
+.transport-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+    margin: 2rem 0;
+}
+
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.transport-detail {
+    background: var(--bg-card-light);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.transport-detail strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.transport-detail span {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
 /* ==================== Animations ==================== */
 .fade-in {
     animation: fadeIn 0.5s ease-in;
@@ -635,5 +886,23 @@ body {
     
     .tools-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .flight-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .transport-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .transport-detail {
+        display: flex;
+        flex-direction: column;
     }
 }
