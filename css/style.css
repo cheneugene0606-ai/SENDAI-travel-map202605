@@ -1,4 +1,3 @@
-/* ==================== 核心變數修正 ==================== */
 :root {
     --primary: #d4a574;
     --primary-dark: #b8935f;
@@ -6,83 +5,60 @@
     --bg-dark: #0a0a0a;
     --bg-card: #1a1a1a;
     --bg-card-light: #252525;
-    --bg-cream: #1a1a1a; /* 修復：補齊遺失變數 */
+    --bg-cream: #1a1a1a; /* 修正：解決透明背景問題 [cite: 1] */
     --text-light: #ffffff;
     --text-gold: #d4a574;
     --text-gray: #a0a0a0;
     --border-gold: #d4a574;
-    --shadow-gold: rgba(212, 165, 116, 0.3);
-    --shadow-dark: rgba(0, 0, 0, 0.8);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
 
-/* ==================== UI 框框修復 ==================== */
-.timeline-content {
+/* 標記與 UI 框框 [cite: 2] */
+.timeline-content, .restaurant-option-card, .store-item {
     background: var(--bg-card-light) !important;
-    border-left: 3px solid var(--accent-gold);
-    padding: 1.2rem;
-    border-radius: 12px;
-    margin-top: 0.5rem;
-    box-shadow: 0 4px 15px var(--shadow-dark);
-}
-
-.restaurant-option-card, .store-item {
-    background: var(--bg-card-light);
     border: 1px solid var(--border-gold);
     border-radius: 12px;
     padding: 1.2rem;
     margin-bottom: 1rem;
-    color: var(--text-light);
 }
 
-.option-badge {
-    background: rgba(212, 165, 116, 0.2);
-    color: var(--accent-gold);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-left: 8px;
-}
-
-/* ==================== 工具選單美化 ==================== */
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; padding: 1.5rem; }
+/* 修復旅行工具 UI (解決照片中的紫色連結問題)  */
+.tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; }
 .tool-card {
     background: var(--bg-card-light);
     border: 1.5px solid var(--border-gold);
     border-radius: 12px;
-    padding: 1.2rem;
+    padding: 1rem;
     text-align: center;
     text-decoration: none !important;
+    color: var(--text-light) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
     transition: 0.3s;
 }
-.tool-card:hover { transform: translateY(-3px); border-color: var(--accent-gold); box-shadow: 0 5px 15px var(--shadow-gold); }
-.tool-icon { font-size: 2rem; }
-.tool-name { font-weight: bold; color: var(--primary); font-size: 0.95rem; }
-.tool-desc { font-size: 0.75rem; color: var(--text-gray); }
+.tool-icon { font-size: 1.8rem; margin-bottom: 5px; }
+.tool-name { font-weight: bold; color: var(--primary); font-size: 0.9rem; }
+.tool-desc { font-size: 0.7rem; color: var(--text-gray); }
 
-/* ==================== 手機版優化 ==================== */
+/* 手機版優化  */
 @media (max-width: 768px) {
-    .hero-section h1 { font-size: 1.6rem; letter-spacing: 1px; }
+    .hero-section h1 { font-size: 1.6rem; }
     .section-title { font-size: 1.3rem; }
     .day-selector { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .float-btn { min-width: 100px; padding: 8px 14px; font-size: 0.75rem; right: 10px; border-radius: 50px; }
+    .float-btn { min-width: 90px; padding: 8px 12px; font-size: 0.75rem; right: 10px; border-radius: 50px; }
     .leaflet-marker-icon { transform: scale(0.85) !important; }
-    
-    /* 按鈕垂直排列定位 */
     .tools-btn-pos { bottom: 15px; }
-    .transport-btn-pos { bottom: 75px; }
-    .coupon-btn-pos { bottom: 135px; }
-    .itinerary-btn-pos { bottom: 195px; }
+    .coupon-btn-pos { bottom: 75px; }
+    .itinerary-btn-pos { bottom: 135px; }
 }
 
-/* ==================== 其他佈局 ==================== */
-.hero-section { height: 400px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 2px solid var(--border-gold); }
-.hero-overlay { position: relative; z-index: 2; text-align: center; background: rgba(0,0,0,0.5); padding: 2rem; border-radius: 15px; }
-#map { height: 450px; width: 100%; border: 1px solid var(--border-gold); }
-.float-btn { position: fixed; right: 20px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--bg-dark); border: 2px solid var(--accent-gold); padding: 12px 24px; font-weight: bold; z-index: 1000; cursor: pointer; text-decoration: none; }
+/* 其他樣式... [cite: 6] */
+#map { height: 400px; border: 1px solid var(--border-gold); }
+.float-btn { position: fixed; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--bg-dark); border: 2px solid var(--accent-gold); z-index: 1000; cursor: pointer; }
+.tools-panel { position: fixed; bottom: -100%; left: 0; right: 0; background: var(--bg-card); border-top: 3px solid var(--border-gold); transition: 0.4s; z-index: 1001; }
+.tools-panel.active { bottom: 0; }
+.modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; z-index:2000; }
+.modal-content { position: fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:400px; background:var(--bg-card); border:2px solid var(--border-gold); display:none; z-index:2001; padding:1.5rem; border-radius:12px; }
