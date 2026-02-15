@@ -19,11 +19,24 @@ document.addEventListener('DOMContentLoaded', function() {
     initMap();
     renderDaySelector();
     
+    // 初始化永久標記
     if (typeof supermarkets !== 'undefined') addPermanentMarkers(supermarkets, '#6ba985', '🛒', supermarketMarkers);
     if (typeof shoppingStores !== 'undefined') addPermanentMarkers(shoppingStores, '#c9a961', '🛍️', shoppingMarkers);
     if (typeof souvenirStores !== 'undefined') addPermanentMarkers(souvenirStores, '#daa65f', '🎁', souvenirMarkers);
     
+    // 預設顯示第一天
     showDay(1);
+
+    // 點擊面板外部關閉工具面板
+    document.addEventListener('click', function(event) {
+        const panel = document.getElementById('tools-panel');
+        const toggleBtn = document.querySelector('.tools-btn-pos');
+        if (panel && panel.classList.contains('active')) {
+            if (!panel.contains(event.target) && !toggleBtn.contains(event.target)) {
+                panel.classList.remove('active');
+            }
+        }
+    });
 });
 
 function initMap() {
@@ -54,7 +67,7 @@ function showDay(day) {
     }, 100);
 }
 
-// 渲染行程 (包含智慧型篩選按鈕)
+// 渲染行程 (移除分類篩選，保留智慧型時段按鈕)
 function renderItinerary(dayData) {
     let html = `
         <div class="day-header fade-in">
@@ -65,7 +78,7 @@ function renderItinerary(dayData) {
         </div>
     `;
 
-    // 智慧型時段按鈕
+    // 智慧型時段/活動按鈕
     const dayMealTypes = new Set(['all']);
     dayData.locations.forEach(loc => { if (loc.mealType) dayMealTypes.add(loc.mealType); });
 
@@ -92,9 +105,14 @@ function renderItinerary(dayData) {
                 <div class="timeline-dot">${index + 1}</div>
                 <div class="timeline-time">${loc.time}</div>
                 <div class="timeline-content">
-                    <div class="timeline-title">${loc.name} ${hasOptions ? '<small>📋 選項</small>' : ''}</div>
+                    <div class="timeline-title">
+                        ${loc.name} 
+                        ${hasOptions ? '<span class="option-badge">📋 點擊查看選項</span>' : ''}
+                    </div>
                     <div class="timeline-desc">${loc.desc}</div>
-                    <div class="timeline-tags">${loc.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                    <div class="timeline-tags">
+                        ${loc.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
                 </div>
             </div>
         `;
@@ -104,7 +122,7 @@ function renderItinerary(dayData) {
     document.getElementById('itinerary-container').innerHTML = html;
 }
 
-// 添加地圖標記 (統一 28x28)
+// 地圖標記邏輯
 function addMapMarkers(dayData) {
     dayData.locations.filter(loc => loc.coords && shouldShowLocation(loc)).forEach((loc, i) => {
         const color = getCategoryColor(loc.category);
@@ -134,24 +152,33 @@ function addPermanentMarkers(data, color, char, markerArray) {
 
 function createStorePopup(item, color) {
     return `
-        <div style="min-width:200px;">
+        <div style="min-width:200px; font-family: 'Noto Sans TC', sans-serif;">
             <h4 style="color:${color};margin-bottom:5px;">${item.name}</h4>
-            <p style="font-size:13px;margin:5px 0;">${item.desc}</p>
-            <a href="${getSafeMapUrl(item.name)}" target="_blank" style="display:block;background:${color};color:white;text-align:center;padding:8px;border-radius:5px;text-decoration:none;margin-top:10px;">🗺️ Google 地圖</a>
+            <p style="font-size:13px;margin:5px 0;color:#666;">${item.desc}</p>
+            ${item.hours ? `<p style="font-size:12px;color:${color};">⏰ ${item.hours}</p>` : ''}
+            <a href="${getSafeMapUrl(item.name)}" target="_blank" style="display:block;background:${color};color:white;text-align:center;padding:8px;border-radius:5px;text-decoration:none;margin-top:10px;font-weight:600;">🗺️ Google 地圖</a>
         </div>
     `;
 }
 
-// 篩選功能
+// 篩選與工具邏輯
 function shouldShowLocation(loc) {
     if (currentCategory !== 'all' && loc.category !== currentCategory) return false;
     if (currentMealType !== 'all' && loc.mealType !== currentMealType) return false;
     return true;
 }
 
-function filterByCategory(cat) { currentCategory = cat; showDay(currentDay); }
-function filterByMeal(meal) { currentMealType = meal; showDay(currentDay); }
-function clearMarkers() { markers.forEach(m => map.removeLayer(m)); markers = []; }
+function filterByMeal(meal) {
+    currentMealType = meal;
+    const dayData = itineraryData[currentDay];
+    renderItinerary(dayData);
+    addMapMarkers(dayData);
+}
+
+function clearMarkers() {
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+}
 
 function renderDaySelector() {
     const div = document.getElementById('day-selector');
@@ -164,21 +191,30 @@ function renderDaySelector() {
     });
 }
 
-// 餐廳選項 Modal
+// --- 美化後的方案選擇面板 ---
 function showRestaurantOptions(day, mealType) {
     const options = restaurantOptions[`day${day}_${mealType}`];
     if (!options) return;
+    
     const panel = document.getElementById('restaurant-options-panel');
     const content = document.getElementById('restaurant-options-content');
-    document.getElementById('restaurant-options-title').innerText = `方案選擇`;
+    const titleNames = { 'breakfast': '早餐', 'lunch': '午餐', 'dinner': '晚餐', 'snack': '點心/宵夜', 'sightseeing': '景點巡禮', 'parco': 'PARCO 購物', 'parco2': 'PARCO 2 購物' };
+    
+    document.getElementById('restaurant-options-title').innerText = `🍽️ Day ${day} ${titleNames[mealType] || '推薦選項'}`;
     
     content.innerHTML = options.map(opt => `
-        <div class="restaurant-option-card" style="border:1px solid #eee;padding:15px;margin-bottom:10px;border-radius:8px;">
-            <div style="font-weight:bold;font-size:1.1rem;">${opt.name}</div>
-            <div style="font-size:0.9rem;color:#666;">${opt.desc}</div>
-            <div style="margin-top:10px;">
-                <button onclick="focusOnStoreByCoords(${opt.coords[0]}, ${opt.coords[1]}, '${opt.name}')" style="background:#8b6f47;color:white;border:none;padding:5px 10px;border-radius:4px;">📍 定位</button>
-                <a href="${getSafeMapUrl(opt.name)}" target="_blank" style="text-decoration:none;color:#d47474;margin-left:10px;">🗺️ 地圖</a>
+        <div class="restaurant-option-card">
+            <div class="restaurant-option-header">
+                <div class="restaurant-option-name">${opt.name}</div>
+                ${opt.hours ? `<div class="restaurant-option-hours">⏰ ${opt.hours}</div>` : ''}
+            </div>
+            <div class="restaurant-option-desc">${opt.desc}</div>
+            <div class="restaurant-option-tags">
+                ${opt.tags.map(tag => `<span class="restaurant-option-tag">${tag}</span>`).join('')}
+            </div>
+            <div class="restaurant-option-actions">
+                <button class="restaurant-option-btn restaurant-option-btn-map" onclick="focusOnStoreByCoords(${opt.coords[0]}, ${opt.coords[1]}, '${opt.name}')">📍 定位標記</button>
+                <a href="${getSafeMapUrl(opt.name)}" target="_blank" class="restaurant-option-btn restaurant-option-btn-google">🗺️ Google 地圖</a>
             </div>
         </div>
     `).join('');
@@ -192,19 +228,52 @@ function closeRestaurantOptions() {
     document.getElementById('restaurant-options-overlay').classList.remove('active');
 }
 
+// 工具面板控制
+function toggleToolsPanel() {
+    document.getElementById('tools-panel').classList.toggle('active');
+}
+
+// 永久店家清單顯示
+function showPermanentStores(type) {
+    const listContainer = document.getElementById('permanent-stores-list');
+    let stores = [];
+    
+    if (type === 'all' || type === 'supermarket') supermarkets.forEach(s => stores.push({...s, icon: '🛒', type: '超市'}));
+    if (type === 'all' || type === 'shopping') shoppingStores.forEach(s => stores.push({...s, icon: '🛍️', type: '購物店'}));
+    if (type === 'all' || type === 'souvenir') souvenirStores.forEach(s => stores.push({...s, icon: '🎁', type: '伴手禮'}));
+    
+    let html = '<div class="stores-grid">';
+    stores.forEach(store => {
+        html += `
+            <div class="store-item">
+                <div class="store-item-header">
+                    <span class="store-icon">${store.icon}</span>
+                    <h4 class="store-name">${store.name}</h4>
+                </div>
+                <div class="store-type-badge">${store.type}</div>
+                <div class="store-desc">${store.desc}</div>
+                <div class="store-actions">
+                    <button class="store-map-btn" onclick="focusOnStoreByCoords(${store.coords[0]}, ${store.coords[1]}, '${store.name}')">📍 定位</button>
+                    <a href="${getSafeMapUrl(store.name)}" target="_blank" class="store-google-btn">🗺️ 地圖</a>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    listContainer.innerHTML = html;
+    listContainer.classList.remove('hidden');
+    listContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 function focusOnStoreByCoords(lat, lng, name) {
     map.setView([lat, lng], 17);
     closeRestaurantOptions();
+    // 閃爍一下目標位置或打開 Popup
+    L.popup().setLatLng([lat, lng]).setContent(`<b>${name}</b>`).openOn(map);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
 }
 
 function getCategoryColor(category) {
-    const colors = {
-        attraction: '#8b6f47',
-        restaurant: '#d47474',
-        shopping: '#c9a961',
-        specialty: '#a97c50',
-        market: '#6ba985'
-    };
+    const colors = { attraction: '#8b6f47', restaurant: '#d47474', shopping: '#c9a961', specialty: '#a97c50', market: '#6ba985' };
     return colors[category] || '#8b6f47';
 }
