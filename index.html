@@ -13,28 +13,39 @@
         <div class="hero-overlay">
             <h1>2026 仙台七日深度探險</h1>
             <p class="hero-subtitle">Sendai Travel Map</p>
-            <div class="hero-dates"><span>05.20 — 05.26</span><span class="hero-divider">◆</span><span>7天6夜</span></div>
+            <div class="hero-dates">
+                <span>05.20 — 05.26</span>
+                <span class="hero-divider">◆</span>
+                <span>7天6夜</span>
+            </div>
         </div>
     </div>
 
     <div class="route-overview">
         <h2 class="route-title">◆ 旅行路線總覽 ◆</h2>
-        <div class="route-path">仙台 → 松島 → 仙台港 → 鹽竈 → 仙台</div>
+        <div class="route-path">
+            仙台 → 松島 → 仙台港 → 鹽竈 → 仙台
+        </div>
     </div>
 
     <div class="container">
         <div class="map-section">
-            <h2 class="section-title">📍 每日行程</h2>
-            <div class="map-container"><div id="map"></div></div>
+            <h2 class="section-title">📍 每日行程地圖</h2>
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
         </div>
 
         <h2 class="section-title">每日行程詳情</h2>
-        <div class="day-selector" id="day-selector"></div>
+        <div class="day-selector" id="day-selector">
+            </div>
 
-        <div id="itinerary-container"></div>
+        <div id="itinerary-container">
+            </div>
 
         <div class="info-section">
             <h2 class="section-title">旅行資訊</h2>
+            
             <div class="info-card stores-card">
                 <h3>🛍️ 永久店家清單</h3>
                 <div class="permanent-stores-filter">
@@ -58,19 +69,30 @@
     </div>
 
     <div id="tools-panel" class="tools-panel">
-        <div class="tools-header"><h3>🧳 旅行必備工具</h3><button class="tools-close-btn" onclick="toggleToolsPanel()">✕</button></div>
+        <div class="tools-header">
+            <h3>🧳 旅行必備工具</h3>
+            <button class="tools-close-btn" onclick="toggleToolsPanel()">✕</button>
+        </div>
         <div class="tools-grid">
             <a href="https://play.google.com/store/apps/details?id=jp.go.nict.voicetra" target="_blank" class="tool-card">
-                <div class="tool-icon">🗣️</div><div class="tool-name">VoiceTra</div><div class="tool-desc">多語言翻譯</div>
+                <div class="tool-icon">🗣️</div>
+                <div class="tool-name">VoiceTra</div>
+                <div class="tool-desc">多語言翻譯</div>
             </a>
             <a href="https://transit.yahoo.co.jp/smartphone/app/" target="_blank" class="tool-card">
-                <div class="tool-icon">🚇</div><div class="tool-name">乘換案內</div><div class="tool-desc">交通查詢</div>
+                <div class="tool-icon">🚇</div>
+                <div class="tool-name">乘換案內</div>
+                <div class="tool-desc">交通查詢</div>
             </a>
             <a href="https://japantravel.navitime.com/zh-tw/area/jp/route/" target="_blank" class="tool-card">
-                <div class="tool-icon">🌏</div><div class="tool-name">Japan Travel</div><div class="tool-desc">路線導航</div>
+                <div class="tool-icon">🌏</div>
+                <div class="tool-name">Japan Travel</div>
+                <div class="tool-desc">路線導航</div>
             </a>
             <a href="https://tenki.jp/forecast/2/7/" target="_blank" class="tool-card">
-                <div class="tool-icon">☀️</div><div class="tool-name">Tenki.jp</div><div class="tool-desc">天氣預報</div>
+                <div class="tool-icon">☀️</div>
+                <div class="tool-name">Tenki.jp</div>
+                <div class="tool-desc">天氣預報</div>
             </a>
         </div>
     </div>
@@ -81,8 +103,13 @@
 
     <div id="coupon-overlay" class="modal-overlay" onclick="closeCouponModal()"></div>
     <div id="coupon-modal" class="modal-content">
-        <div class="modal-header"><h3>🎟️ 優惠券專區</h3><button class="modal-close-btn" onclick="closeCouponModal()">✕</button></div>
-        <div class="modal-body"><p style="text-align:center; padding:2rem;">🎁 目前尚無可用優惠券</p></div>
+        <div class="modal-header">
+            <h3>🎟️ 優惠券專區</h3>
+            <button class="modal-close-btn" onclick="closeCouponModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <p style="text-align:center; padding:2rem; color: var(--text-gray);">🎁 目前尚無可用優惠券</p>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
