@@ -57,10 +57,41 @@
         </div>
     </div>
 
+    <!-- Travel Tools Panel -->
+    <div id="tools-panel" class="tools-panel">
+        <div class="tools-header">
+            <h3>🧳 旅行必備工具</h3>
+            <button class="tools-close-btn" onclick="toggleToolsPanel()">✕</button>
+        </div>
+        <div class="tools-grid">
+            <a href="https://play.google.com/store/apps/details?id=jp.go.nict.voicetra" target="_blank" class="tool-card">
+                <div class="tool-icon">🗣️</div>
+                <div class="tool-name">VoiceTra</div>
+                <div class="tool-desc">多語言翻譯</div>
+            </a>
+            <a href="https://transit.yahoo.co.jp/smartphone/app/" target="_blank" class="tool-card">
+                <div class="tool-icon">🚇</div>
+                <div class="tool-name">乘換案內</div>
+                <div class="tool-desc">交通查詢</div>
+            </a>
+            <a href="https://japantravel.navitime.com/zh-tw/area/jp/route/" target="_blank" class="tool-card">
+                <div class="tool-icon">🌏</div>
+                <div class="tool-name">Japan Travel</div>
+                <div class="tool-desc">路線導航</div>
+            </a>
+            <a href="https://tenki.jp/forecast/2/7/" target="_blank" class="tool-card">
+                <div class="tool-icon">☀️</div>
+                <div class="tool-name">Tenki.jp</div>
+                <div class="tool-desc">天氣預報</div>
+            </a>
+        </div>
+    </div>
+
     <!-- Floating Buttons -->
     <a href="#itinerary-container" class="float-btn itinerary-btn-pos">📅 行程</a>
     <button class="float-btn coupon-btn-pos" onclick="openCouponModal()">🎟️ 優惠券</button>
     <a href="#map" class="float-btn transport-btn-pos">🚌 交通</a>
+    <button class="float-btn tools-btn-pos" onclick="toggleToolsPanel()">📱 工具</button>
 
     <!-- Coupon Modal -->
     <div id="coupon-overlay" class="modal-overlay" onclick="closeCouponModal()"></div>
