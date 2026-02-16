@@ -210,19 +210,69 @@ function showRestaurantOptions(day, mealType) {
     const content = document.getElementById('restaurant-options-content');
     document.getElementById('restaurant-options-title').innerText = `方案選擇`;
     
-    content.innerHTML = options.map(opt => `
-        <div class="restaurant-option-card" style="border:1px solid #eee;padding:15px;margin-bottom:10px;border-radius:8px;">
-            <div style="font-weight:bold;font-size:1.1rem;">${opt.name}</div>
-            <div style="font-size:0.9rem;color:#666;">${opt.desc}</div>
-            <div style="margin-top:10px;">
-                <button onclick="focusOnStoreByCoords(${opt.coords[0]}, ${opt.coords[1]}, '${opt.name}')" style="background:#8b6f47;color:white;border:none;padding:5px 10px;border-radius:4px;">📍 定位</button>
-                <a href="${getSafeMapUrl(opt.name)}" target="_blank" style="text-decoration:none;color:#d47474;margin-left:10px;">🗺️ 地圖</a>
-            </div>
-        </div>
-    `).join('');
+    content.innerHTML = options.map(opt => {
+        // 檢查是否為階層式結構（百貨公司 + 店家）
+        if (opt.isCategory && opt.stores) {
+            // 百貨公司卡片
+            return `
+                <div class="category-card" style="border:2px solid var(--primary);padding:0;margin-bottom:15px;border-radius:12px;overflow:hidden;background:var(--bg-card-light);">
+                    <div class="category-header" style="background:var(--primary);color:var(--bg-dark);padding:12px 15px;font-weight:bold;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleStores(this)">
+                        <span>${opt.name}</span>
+                        <span class="toggle-icon" style="font-size:1.2rem;">▼</span>
+                    </div>
+                    <div class="category-desc" style="padding:10px 15px;color:var(--text-gray);font-size:0.9rem;border-bottom:1px solid #444;">
+                        ${opt.desc} | ⏰ ${opt.hours}
+                        <div style="margin-top:5px;">${opt.tags.map(t => `<span style="background:var(--bg-card);padding:2px 8px;border-radius:10px;font-size:0.8rem;margin-right:5px;">${t}</span>`).join('')}</div>
+                    </div>
+                    <div class="stores-list" style="display:none;padding:10px;">
+                        ${opt.stores.map(store => `
+                            <div class="store-item" style="background:var(--bg-card);border:1px solid #444;padding:10px;margin-bottom:8px;border-radius:8px;">
+                                <div style="font-weight:600;font-size:1rem;color:var(--text-light);margin-bottom:3px;">${store.name}</div>
+                                <div style="font-size:0.85rem;color:var(--text-gray);margin-bottom:5px;">${store.desc}</div>
+                                <div style="font-size:0.8rem;color:var(--text-gray);">⏰ ${store.hours}</div>
+                                <div style="margin-top:5px;">${store.tags.map(t => `<span style="background:var(--bg-dark);color:var(--text-gray);padding:2px 6px;border-radius:8px;font-size:0.75rem;margin-right:3px;">${t}</span>`).join('')}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="padding:10px 15px;border-top:1px solid #444;">
+                        <button onclick="focusOnStoreByCoords(${opt.coords[0]}, ${opt.coords[1]}, '${opt.name}')" style="background:var(--primary);color:var(--bg-dark);border:none;padding:8px 15px;border-radius:6px;font-weight:600;cursor:pointer;width:100%;">📍 在地圖上查看</button>
+                    </div>
+                </div>
+            `;
+        } else {
+            // 一般店家卡片（原有格式）
+            return `
+                <div class="restaurant-option-card" style="border:1px solid #444;padding:15px;margin-bottom:10px;border-radius:8px;background:var(--bg-card-light);">
+                    <div style="font-weight:bold;font-size:1.1rem;color:var(--text-light);">${opt.name}</div>
+                    <div style="font-size:0.9rem;color:var(--text-gray);margin:5px 0;">${opt.desc}</div>
+                    ${opt.tags ? `<div style="margin:5px 0;">${opt.tags.map(t => `<span style="background:var(--bg-card);color:var(--text-gray);padding:3px 8px;border-radius:10px;font-size:0.8rem;margin-right:5px;">${t}</span>`).join('')}</div>` : ''}
+                    ${opt.hours ? `<div style="color:var(--primary);font-size:0.85rem;margin:5px 0;">⏰ ${opt.hours}</div>` : ''}
+                    <div style="margin-top:10px;">
+                        <button onclick="focusOnStoreByCoords(${opt.coords[0]}, ${opt.coords[1]}, '${opt.name}')" style="background:var(--primary);color:var(--bg-dark);border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;">📍 定位</button>
+                        <a href="${getSafeMapUrl(opt.name)}" target="_blank" style="text-decoration:none;color:var(--primary);margin-left:10px;font-weight:600;">🗺️ 地圖</a>
+                    </div>
+                </div>
+            `;
+        }
+    }).join('');
     
     document.getElementById('restaurant-options-overlay').classList.add('active');
     panel.classList.add('active');
+}
+
+// 展開/收合店家列表
+function toggleStores(header) {
+    const card = header.closest('.category-card');
+    const storesList = card.querySelector('.stores-list');
+    const icon = header.querySelector('.toggle-icon');
+    
+    if (storesList.style.display === 'none') {
+        storesList.style.display = 'block';
+        icon.textContent = '▲';
+    } else {
+        storesList.style.display = 'none';
+        icon.textContent = '▼';
+    }
 }
 
 function closeRestaurantOptions() {
