@@ -563,20 +563,20 @@ const itineraryData = {
             },
             {
                 time: "12:00",
-                name: "仙台機場午餐",
-                desc: "機場內享用最後一餐",
-                category: "restaurant",
-                mealType: "lunch",
-                tags: ["✈️ 機場", "🍱 午餐"],
-                coords: [38.1397, 140.9169]
-            },
-            {
-                time: "14:00",
                 name: "前往仙台機場",
                 desc: "搭乘仙台空港 Access 線前往機場",
                 category: "attraction",
                 mealType: null,
                 tags: ["🚃 交通", "✈️ 機場"],
+                coords: [38.1397, 140.9169]
+            },
+            {
+                time: "14:00",
+                name: "仙台機場午餐",
+                desc: "機場內享用最後一餐",
+                category: "restaurant",
+                mealType: "lunch",
+                tags: ["✈️ 機場", "🍱 午餐"],
                 coords: [38.1397, 140.9169]
             },
             {
