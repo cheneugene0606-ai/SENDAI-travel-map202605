@@ -19,6 +19,7 @@ function getSafeMapUrl(name, customUrl) {
 document.addEventListener('DOMContentLoaded', function() {
     initMap();
     renderDaySelector();
+    initCountdown(); // 初始化倒數計時
     
     // 設置初始背景圖
     const heroSection = document.querySelector('.hero-section');
@@ -410,4 +411,39 @@ function getCategoryColor(category) {
         market: '#6ba985'
     };
     return colors[category] || '#8b6f47';
+}
+// ==================== 倒數計時功能 ====================
+function initCountdown() {
+    const targetDate = new Date('2026-05-20T11:35:00+08:00').getTime(); // 出發時間
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance < 0) {
+            // 已經出發
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+            document.querySelector('.countdown-label').textContent = '旅程已開始！';
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    
+    // 立即執行一次
+    updateCountdown();
+    
+    // 每秒更新
+    setInterval(updateCountdown, 1000);
 }
