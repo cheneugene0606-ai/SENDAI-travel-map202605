@@ -168,15 +168,16 @@ const itineraryData = {
         location: "松島",
         bgImage: "images/day3.jpg",
         hotel: {
-            name: "Daiwa Roynet Hotel Sendai Ichibancho PREMIER",
-            location: "仙台一番町",
-            checkIn: "14:00",
-            dates: "5/23-5/26 (3晚)",
-            image: "images/hotel2.jpg",
+            name: "Daiwa Roynet Hotel Sendai Nishiguchi PREMIER",
+            location: "仙台西口",
+            checkIn: "已入住",
+            dates: "5/20-5/23 (3晚)",
+            image: "images/hotel1.jpg",
             features: [
-                "🏙️ 市中心最佳位置",
-                "🛍️ 步行到一番町商店街 3 分鐘",
-                "🍜 周邊餐廳林立"
+                "🛁 頂樓天然溫泉「都之湯」",
+                "🏊 室內恆溫泳池",
+                "🧺 洗衣機烘衣機設備",
+                "📍 仙台站西口直達"
             ]
         },
         locations: [
@@ -246,29 +247,20 @@ const itineraryData = {
             {
                 time: "17:30",
                 name: "返回仙台",
-                desc: "搭乘 JR 仙石線返回仙台站，前往新飯店 Check-in",
+                desc: "搭乘 JR 仙石線返回仙台站",
                 category: "attraction",
                 mealType: null,
-                tags: ["🚃 交通", "🏨 換飯店"],
+                tags: ["🚃 交通"],
                 coords: [38.2605, 140.8789]
             },
             {
-                time: "18:30",
-                name: "Check-in 一番町飯店",
-                desc: "入住 Daiwa Roynet Hotel Sendai Ichibancho PREMIER",
-                category: "attraction",
-                mealType: null,
-                tags: ["🏨 Check-in"],
-                coords: [38.2626, 140.8742]
-            },
-            {
                 time: "19:30",
-                name: "一番町晚餐",
-                desc: "飯店周邊多家居酒屋和餐廳可選",
+                name: "仙台站周邊晚餐",
+                desc: "西口周邊多家居酒屋和餐廳可選",
                 category: "restaurant",
                 mealType: "dinner",
                 tags: ["🍶 居酒屋", "🌃 晚餐"],
-                coords: [38.2626, 140.8742]
+                coords: [38.2605, 140.8789]
             }
         ]
     },
@@ -281,11 +273,25 @@ const itineraryData = {
         hotel: {
             name: "Daiwa Roynet Hotel Sendai Ichibancho PREMIER",
             location: "仙台一番町",
-            checkIn: "已入住",
+            checkIn: "14:00",
+            dates: "5/23-5/26 (3晚)",
             image: "images/hotel2.jpg",
-            features: ["🏙️ 市中心", "🛍️ 一番町"]
+            features: [
+                "🏙️ 市中心最佳位置",
+                "🛍️ 步行到一番町商店街 3 分鐘",
+                "🍜 周邊餐廳林立"
+            ]
         },
         locations: [
+            {
+                time: "08:00",
+                name: "西口飯店退房",
+                desc: "退房並寄放行李",
+                category: "attraction",
+                mealType: null,
+                tags: ["🏨 退房"],
+                coords: [38.2605, 140.8789]
+            },
             {
                 time: "09:00",
                 name: "珈琲館 仙台青葉通店",
@@ -341,9 +347,18 @@ const itineraryData = {
                 coords: [38.2605, 140.8789]
             },
             {
+                time: "17:30",
+                name: "Check-in 一番町飯店",
+                desc: "入住 Daiwa Roynet Hotel Sendai Ichibancho PREMIER",
+                category: "attraction",
+                mealType: null,
+                tags: ["🏨 Check-in", "🏨 換飯店"],
+                coords: [38.2626, 140.8742]
+            },
+            {
                 time: "18:30",
-                name: "仙台站晚餐",
-                desc: "仙台站周邊餐廳選擇",
+                name: "一番町晚餐",
+                desc: "飯店周邊餐廳選擇",
                 category: "restaurant",
                 mealType: "dinner",
                 tags: ["🍽️ 晚餐"],
@@ -1098,11 +1113,11 @@ const restaurantOptions = {
     "day2_breakfast": [
         {
             name: "マルモ",
-            desc: "仙台朝市人氣店家，新鮮海鮮料理（朝市ビル 1F 奥）",
+            desc: "仙台朝市人氣店家，新鮮海鮮料理（中央 4-3-28 朝市ビル 1F 奥）",
             tags: ["🐟 海鮮", "⭐ 人氣"],
             hours: "07:00-15:00",
-            coords: [38.2623, 140.8789],
-            url: "https://www.google.com/maps/place/%E3%83%9E%E3%83%AB%E3%83%A2/@38.2623,140.8789"
+            coords: [38.2624, 140.8787],
+            url: "https://www.google.com/maps/search/%E3%83%9E%E3%83%AB%E3%83%A2+%E4%BB%99%E5%8F%B0%E6%9C%9D%E5%B8%82/@38.2624,140.8787"
         },
         {
             name: "浜伸 渡邊商店（はましん食堂）",
