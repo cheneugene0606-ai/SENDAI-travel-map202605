@@ -1,4 +1,4 @@
-=// 完整行程數據
+// 完整行程數據
 const itineraryData = {
     1: {
         title: "Day 1: 抵達仙台巡禮",
