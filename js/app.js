@@ -8,13 +8,13 @@ let restaurantMarkers = [];
 let currentDay = 1;
 let currentCategory = 'all';
 let currentMealType = 'all';
-
+ 
 // 工具函數
 function getSafeMapUrl(name, customUrl) {
     if (customUrl) return customUrl;
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
 }
-
+ 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
     initMap();
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
+ 
 function initMap() {
     map = L.map('map').setView([38.2682, 140.8694], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -57,11 +57,11 @@ function initMap() {
         maxZoom: 19
     }).addTo(map);
 }
-
+ 
 function showDay(day) {
     currentDay = day;
     document.querySelectorAll('.day-card').forEach((card, i) => card.classList.toggle('active', i + 1 === day));
-
+ 
     clearMarkers();
     const dayData = itineraryData[day];
     
@@ -78,7 +78,7 @@ function showDay(day) {
         if (container) container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
 }
-
+ 
 function renderItinerary(dayData) {
     let html = `
         <div class="day-header fade-in">
@@ -88,7 +88,7 @@ function renderItinerary(dayData) {
             </div>
         </div>
     `;
-
+ 
     // 顯示旅館資訊（如果有）
     if (dayData.hotel) {
         const hotelImage = dayData.hotel.image ? `<img src="${dayData.hotel.image}" alt="${dayData.hotel.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 0.8rem;">` : '';
@@ -107,11 +107,11 @@ function renderItinerary(dayData) {
             </div>
         `;
     }
-
+ 
     // 智慧型時段按鈕
     const dayMealTypes = new Set(['all']);
     dayData.locations.forEach(loc => { if (loc.mealType) dayMealTypes.add(loc.mealType); });
-
+ 
     if (dayMealTypes.size > 1) {
         html += `<div class="meal-filters">`;
         for (const [key, meal] of Object.entries(mealTypes)) {
@@ -123,7 +123,7 @@ function renderItinerary(dayData) {
         }
         html += `</div>`;
     }
-
+ 
     // 時間軸
     html += `<div class="timeline">`;
     dayData.locations.forEach((loc, index) => {
@@ -143,10 +143,10 @@ function renderItinerary(dayData) {
         `;
     });
     html += `</div>`;
-
+ 
     document.getElementById('itinerary-container').innerHTML = html;
 }
-
+ 
 function addMapMarkers(dayData) {
     dayData.locations.filter(loc => loc.coords && shouldShowLocation(loc)).forEach((loc, i) => {
         const color = getCategoryColor(loc.category);
@@ -160,7 +160,7 @@ function addMapMarkers(dayData) {
         markers.push(marker);
     });
 }
-
+ 
 function addPermanentMarkers(data, color, char, markerArray) {
     data.forEach(item => {
         const icon = L.divIcon({
@@ -173,7 +173,7 @@ function addPermanentMarkers(data, color, char, markerArray) {
         markerArray.push(marker);
     });
 }
-
+ 
 function createStorePopup(item, color) {
     const googleMapsUrl = getSafeMapUrl(item.name, item.url);
     return `
@@ -184,17 +184,17 @@ function createStorePopup(item, color) {
         </div>
     `;
 }
-
+ 
 function shouldShowLocation(loc) {
     if (currentCategory !== 'all' && loc.category !== currentCategory) return false;
     if (currentMealType !== 'all' && loc.mealType !== currentMealType) return false;
     return true;
 }
-
+ 
 function filterByCategory(cat) { currentCategory = cat; showDay(currentDay); }
 function filterByMeal(meal) { currentMealType = meal; showDay(currentDay); }
 function clearMarkers() { markers.forEach(m => map.removeLayer(m)); markers = []; }
-
+ 
 function renderDaySelector() {
     const div = document.getElementById('day-selector');
     daysConfig.forEach(c => {
@@ -205,7 +205,7 @@ function renderDaySelector() {
         div.appendChild(card);
     });
 }
-
+ 
 function showRestaurantOptions(day, mealType) {
     const options = restaurantOptions[`day${day}_${mealType}`];
     if (!options) return;
@@ -262,7 +262,7 @@ function showRestaurantOptions(day, mealType) {
     document.getElementById('restaurant-options-overlay').classList.add('active');
     panel.classList.add('active');
 }
-
+ 
 // 展開/收合店家列表
 function toggleStores(header) {
     const card = header.closest('.category-card');
@@ -277,12 +277,12 @@ function toggleStores(header) {
         icon.textContent = '▼';
     }
 }
-
+ 
 function closeRestaurantOptions() {
     document.getElementById('restaurant-options-panel').classList.remove('active');
     document.getElementById('restaurant-options-overlay').classList.remove('active');
 }
-
+ 
 function focusOnStoreByCoords(lat, lng, name) {
     if (map) {
         map.setView([lat, lng], 17);
@@ -302,7 +302,7 @@ function focusOnStoreByCoords(lat, lng, name) {
         document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
-
+ 
 // ==================== 永久店家摺疊功能 ====================
 function toggleStoreCategory(categoryType) {
     const content = document.getElementById(`content-${categoryType}`);
@@ -326,7 +326,7 @@ function toggleStoreCategory(categoryType) {
     content.style.display = 'block';
     arrow.textContent = '▲';
 }
-
+ 
 function loadStoresByCategory(categoryType, container) {
     let stores = [];
     
@@ -378,7 +378,7 @@ function loadStoresByCategory(categoryType, container) {
     html += '</div>';
     container.innerHTML = html;
 }
-
+ 
 // 舊函數保留（以防其他地方有用到）
 function showPermanentStores(type) {
     const listContainer = document.getElementById('permanent-stores-list');
@@ -466,21 +466,21 @@ function showPermanentStores(type) {
         listContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
-
+ 
 function toggleToolsPanel() {
     document.getElementById('tools-panel').classList.toggle('active');
 }
-
+ 
 function openCouponModal() {
     document.getElementById('coupon-overlay').style.display = 'block';
     document.getElementById('coupon-modal').style.display = 'block';
 }
-
+ 
 function closeCouponModal() {
     document.getElementById('coupon-overlay').style.display = 'none';
     document.getElementById('coupon-modal').style.display = 'none';
 }
-
+ 
 function getCategoryColor(category) {
     const colors = {
         attraction: '#8b6f47',
