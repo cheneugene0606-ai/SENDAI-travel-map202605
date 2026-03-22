@@ -794,6 +794,30 @@ const shoppingStores = [
         coords: [38.2598, 140.8802],
         tags: ["📷 相機", "💊 藥妝"],
         hours: "10:00-21:00"
+    },
+    {
+        name: "PLAZA S-PAL仙台店",
+        desc: "生活雜貨、化妝品、進口零食",
+        coords: [38.2589523, 140.8820361],
+        tags: ["🎁 雜貨", "💄 化妝品", "🍬 零食"],
+        hours: "10:00-21:00",
+        url: "https://www.google.com/maps/place/?q=place_id:ChIJIQAgjxgoil8Ro0VhzUBKIxI"
+    },
+    {
+        name: "Zoff S-PAL仙台店",
+        desc: "平價眼鏡專賣店，仙台站直結",
+        coords: [38.2591222, 140.8817669],
+        tags: ["👓 眼鏡", "⚡ 快速", "🚉 站內"],
+        hours: "10:00-20:00（週五六至21:00）",
+        url: "https://www.google.com/maps/place/?q=place_id:ChIJiStL38kpil8RV8ZZ1fI4qMg"
+    },
+    {
+        name: "JINS S-PAL東館店",
+        desc: "日本人氣眼鏡品牌，仙台站直結",
+        coords: [38.2595602, 140.8831344],
+        tags: ["👓 眼鏡", "⚡ 快速", "🚉 站內"],
+        hours: "10:00-20:00（週五六至21:00）",
+        url: "https://www.google.com/maps/place/?q=place_id:ChIJq2qDVhgoil8RBKfJ0U7RsZM"
     }
 ];
 
