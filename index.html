@@ -109,20 +109,60 @@
             <div class="info-card stores-card">
                 <h3>🛍️ 永久店家清單</h3>
                 <p style="text-align: center; color: var(--text-gray); margin-bottom: 1.5rem;">
-                    點擊按鈕查看超市、購物店、伴手禮店完整清單
+                    點擊分類查看店家清單
                 </p>
                 
-                <!-- 永久店家篩選按鈕 -->
-                <div class="permanent-stores-filter">
-                    <button class="store-filter-btn active" data-type="all" onclick="showPermanentStores('all')">📍 全部店家 (53)</button>
-                    <button class="store-filter-btn" data-type="supermarket" onclick="showPermanentStores('supermarket')">🛒 超市 (6)</button>
-                    <button class="store-filter-btn" data-type="shopping" onclick="showPermanentStores('shopping')">🛍️ 購物店 (13)</button>
-                    <button class="store-filter-btn" data-type="souvenir" onclick="showPermanentStores('souvenir')">🎁 伴手禮 (16)</button>
-                    <button class="store-filter-btn" data-type="restaurant" onclick="showPermanentStores('restaurant')">🍽️ 餐廳 (18)</button>
+                <!-- 永久店家分類選單（可摺疊） -->
+                <div id="permanent-stores-categories">
+                    <!-- 超市 -->
+                    <div class="store-category-card">
+                        <div class="store-category-header" onclick="toggleStoreCategory('supermarket')">
+                            <span class="store-category-icon">🛒</span>
+                            <span class="store-category-name">超市</span>
+                            <span class="store-category-count">(6)</span>
+                            <span class="store-category-arrow" id="arrow-supermarket">▼</span>
+                        </div>
+                        <div class="store-category-content" id="content-supermarket" style="display: none;">
+                            <!-- 店家清單會動態載入這裡 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 購物店 -->
+                    <div class="store-category-card">
+                        <div class="store-category-header" onclick="toggleStoreCategory('shopping')">
+                            <span class="store-category-icon">🛍️</span>
+                            <span class="store-category-name">購物店</span>
+                            <span class="store-category-count">(13)</span>
+                            <span class="store-category-arrow" id="arrow-shopping">▼</span>
+                        </div>
+                        <div class="store-category-content" id="content-shopping" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- 伴手禮 -->
+                    <div class="store-category-card">
+                        <div class="store-category-header" onclick="toggleStoreCategory('souvenir')">
+                            <span class="store-category-icon">🎁</span>
+                            <span class="store-category-name">伴手禮</span>
+                            <span class="store-category-count">(16)</span>
+                            <span class="store-category-arrow" id="arrow-souvenir">▼</span>
+                        </div>
+                        <div class="store-category-content" id="content-souvenir" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- 餐廳 -->
+                    <div class="store-category-card">
+                        <div class="store-category-header" onclick="toggleStoreCategory('restaurant')">
+                            <span class="store-category-icon">🍽️</span>
+                            <span class="store-category-name">餐廳</span>
+                            <span class="store-category-count">(18)</span>
+                            <span class="store-category-arrow" id="arrow-restaurant">▼</span>
+                        </div>
+                        <div class="store-category-content" id="content-restaurant" style="display: none;">
+                        </div>
+                    </div>
                 </div>
-
-                <!-- 永久店家清單 -->
-                <div id="permanent-stores-list" class="permanent-stores-list"></div>
             </div>
 
             <!-- 交通資訊 -->
@@ -168,14 +208,12 @@
                 
                 <div class="transport-section">
                     <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.8rem;">🚌 るーぷる仙台（Loople Sendai）觀光巴士</h4>
-                    <img src="images/loople-map.jpg" alt="Loople 仙台觀光巴士路線圖" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
                     
                     <div style="background: var(--bg-card-light); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid var(--accent-gold);">
                         <strong style="color: var(--primary);">📍 仙台站上車地點（重要！）</strong>
                         <p style="color: var(--text-light); margin: 0.8rem 0;">
                             <strong>西口巴士總站 16 號乘車處</strong>
                         </p>
-                        <img src="images/loople-station-map.png" alt="Loople 仙台站乘車位置圖" style="width: 100%; border-radius: 8px; margin: 0.8rem 0; border: 1px solid #444;">
                         <p style="color: var(--text-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">
                             🚶 從仙台站西口出來，走下巴士總站樓梯<br>
                             👈 在左手邊找到紅色巴士站牌（有 Loople 標誌）<br>
