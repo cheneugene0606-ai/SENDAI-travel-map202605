@@ -1,0 +1,978 @@
+/* ==================== CSS Variables ==================== */
+:root {
+    --primary: #d4a574;
+    --primary-dark: #b8935f;
+    --accent-gold: #f4d03f;
+    --bg-dark: #0a0a0a;
+    --bg-card: #1a1a1a;
+    --bg-card-light: #252525;
+    --text-light: #ffffff;
+    --text-gold: #d4a574;
+    --text-gray: #a0a0a0;
+    --border-gold: #d4a574;
+    --shadow-gold: rgba(212, 165, 116, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.8);
+}
+
+/* ==================== Reset ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ==================== Hero Section ==================== */
+.hero-section {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.6s ease;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.hero-dates {
+    font-size: 1.2rem;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* ==================== Container ==================== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ==================== Map Section ==================== */
+.map-section {
+    margin-bottom: 3rem;
+}
+
+.map-container {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px var(--shadow-dark);
+    border: 1px solid var(--border-gold);
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+/* ==================== Section Title ==================== */
+.section-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* ==================== Day Selector ==================== */
+.day-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.day-card {
+    background: var(--bg-card);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-gold);
+    border-color: var(--primary);
+}
+
+.day-card.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border-color: var(--accent-gold);
+    box-shadow: 0 6px 20px var(--shadow-gold);
+}
+
+.day-label {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.day-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== Itinerary Container ==================== */
+#itinerary-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 6px 25px var(--shadow-dark);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid var(--border-gold);
+}
+
+/* ==================== Day Header ==================== */
+.day-header {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+    color: var(--text-light);
+    padding: 2rem;
+    position: relative;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.day-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.day-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+/* ==================== Meal Filters ==================== */
+.meal-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: var(--bg-card-light);
+    border-bottom: 2px solid #333;
+    justify-content: center;
+}
+
+.meal-btn {
+    padding: 0.7rem 1.8rem;
+    border: none;
+    background: var(--bg-card);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    border: 2px solid #444;
+}
+
+.meal-btn:hover {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border-color: var(--primary);
+}
+
+.meal-btn.active {
+    background: var(--primary-dark);
+    color: white;
+    border-color: var(--accent-gold);
+}
+
+/* ==================== Timeline ==================== */
+.timeline {
+    position: relative;
+    padding: 2rem 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 4rem;
+    margin-bottom: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    z-index: 2;
+}
+
+.timeline-time {
+    background: var(--text-gray);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-content {
+    background: var(--bg-card-light);
+    padding: 1.2rem;
+    border-radius: 12px;
+    border-left: 3px solid var(--primary);
+}
+
+.timeline-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: var(--bg-card);
+    color: var(--text-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid #444;
+}
+
+/* ==================== Float Buttons ==================== */
+.float-btn {
+    position: fixed;
+    right: 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--bg-dark);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50px;
+    padding: 12px 24px;
+    min-width: 120px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 6px 20px var(--shadow-gold);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.float-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-gold);
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary) 100%);
+}
+
+.itinerary-btn-pos { bottom: 20px; }
+.coupon-btn-pos { bottom: 80px; }
+.transport-btn-pos { bottom: 140px; }
+.tools-btn-pos { bottom: 200px; }
+
+/* ==================== Modal ==================== */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.8); 
+    display: none; 
+    z-index: 2000; 
+}
+
+.modal-content {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 85%; 
+    max-width: 400px; 
+    background: var(--bg-card);
+    border: 2px solid var(--border-gold); 
+    border-radius: 12px;
+    padding: 1.5rem; 
+    display: none; 
+    z-index: 2001;
+}
+
+.modal-header { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 1rem; 
+    border-bottom: 1px solid #444; 
+    padding-bottom: 0.5rem; 
+}
+
+.modal-close-btn { 
+    background: none; 
+    border: none; 
+    color: white; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+}
+
+/* ==================== Restaurant Options Panel ==================== */
+.restaurant-options-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 3000;
+}
+
+.restaurant-options-overlay.active {
+    display: block;
+}
+
+.restaurant-options-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    display: none;
+    overflow-y: auto;
+    z-index: 3001;
+    border: 2px solid var(--border-gold);
+}
+
+.restaurant-options-panel.active {
+    display: block;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #444;
+}
+
+.panel-header h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+.close-panel-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+/* ==================== Travel Tools Panel ==================== */
+.tools-panel {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 350px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-left: 2px solid var(--border-gold);
+    box-shadow: -5px 0 20px var(--shadow-dark);
+    z-index: 2500;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+}
+
+.tools-panel.active {
+    right: 0;
+}
+
+.tools-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #444;
+}
+
+.tools-header h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+.tools-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.tool-card {
+    background: var(--bg-card-light);
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 6px 20px var(--shadow-gold);
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tool-name {
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.tool-desc {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+}
+
+/* ==================== Info Section ==================== */
+.info-section {
+    margin-top: 3rem;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 25px var(--shadow-dark);
+    border: 1px solid var(--border-gold);
+}
+
+.info-card h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+/* ==================== Flight Info ==================== */
+.flight-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #444;
+}
+
+.flight-item:last-child {
+    border-bottom: none;
+}
+
+.flight-label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.flight-detail {
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+/* ==================== Hotel Info ==================== */
+.hotel-item-detail {
+    padding: 1.5rem;
+    background: var(--bg-card-light);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.hotel-item-detail:last-child {
+    margin-bottom: 0;
+}
+
+.hotel-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.hotel-location {
+    color: var(--text-gray);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.hotel-dates {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* ==================== Permanent Stores ==================== */
+.permanent-stores-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.store-filter-btn {
+    padding: 0.7rem 1.5rem;
+    background: var(--bg-card-light);
+    color: var(--text-light);
+    border: 2px solid #444;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.store-filter-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.store-filter-btn.active {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border-color: var(--accent-gold);
+}
+
+.permanent-stores-list {
+    display: none;
+}
+
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.store-item {
+    background: var(--bg-card-light);
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.store-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px var(--shadow-gold);
+}
+
+.store-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.store-icon {
+    font-size: 1.5rem;
+}
+
+.store-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.store-type-badge {
+    display: inline-block;
+    background: var(--bg-card);
+    color: var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.store-desc {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.store-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.store-tag {
+    background: var(--bg-card);
+    color: var(--text-gray);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+.store-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.store-map-btn, .store-google-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.store-map-btn {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border: none;
+}
+
+.store-google-btn {
+    background: var(--bg-card);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    display: block;
+}
+
+.store-map-btn:hover, .store-google-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-gold);
+}
+
+/* ==================== Transport Info ==================== */
+.transport-section {
+    margin-bottom: 2rem;
+}
+
+.transport-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+    margin: 2rem 0;
+}
+
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.transport-detail {
+    background: var(--bg-card-light);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.transport-detail strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.transport-detail span {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ==================== Animations ==================== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== 手機版響應式優化 ==================== */
+@media (max-width: 768px) {
+    .hero-section h1 { 
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    
+    .section-title { 
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        margin: 2rem 0 1rem; 
+    }
+    
+    .day-selector { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    .float-btn { 
+        min-width: 100px; 
+        padding: 8px 14px; 
+        font-size: 0.75rem; 
+        right: 10px; 
+    }
+    
+    .itinerary-btn-pos { bottom: 15px; }
+    .coupon-btn-pos { bottom: 65px; }
+    .transport-btn-pos { bottom: 115px; }
+    .tools-btn-pos { bottom: 165px; }
+
+    .leaflet-marker-icon { 
+        transform: scale(0.85) !important; 
+    }
+    
+    #map {
+        height: 350px;
+    }
+    
+    .timeline {
+        padding-left: 1rem;
+    }
+    
+    .timeline-item {
+        padding-left: 3.5rem;
+    }
+    
+    .timeline-dot {
+        left: 0;
+    }
+    
+    .meal-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+    
+    .tools-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .flight-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .transport-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .transport-detail {
+        display: flex;
+        flex-direction: column;
+    }
+}
+/* ==================== Countdown Timer ==================== */
+.countdown-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(212, 165, 116, 0.15);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 2px solid var(--primary);
+    backdrop-filter: blur(10px);
+    min-width: 80px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    line-height: 1;
+}
+
+.countdown-unit {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .countdown-timer {
+        gap: 0.8rem;
+    }
+    
+    .countdown-item {
+        padding: 0.8rem 1rem;
+        min-width: 70px;
+    }
+    
+    .countdown-number {
+        font-size: 2rem;
+    }
+    
+    .countdown-unit {
+        font-size: 0.75rem;
+    }
+}
