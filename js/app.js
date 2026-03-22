@@ -535,7 +535,3 @@ function initCountdown() {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
-    
-    // 每秒更新
-    setInterval(updateCountdown, 1000);
-}
