@@ -976,3 +976,70 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* ==================== 永久店家摺疊式選單 ==================== */
+.store-category-card {
+    background: var(--bg-card-light);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.store-category-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px var(--shadow-gold);
+}
+
+.store-category-header {
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.store-category-header:hover {
+    background: rgba(212, 165, 116, 0.1);
+}
+
+.store-category-icon {
+    font-size: 1.5rem;
+}
+
+.store-category-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    flex: 1;
+}
+
+.store-category-count {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.store-category-arrow {
+    color: var(--primary);
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.store-category-content {
+    padding: 0 1rem 1rem 1rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
