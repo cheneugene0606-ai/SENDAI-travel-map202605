@@ -36,10 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof souvenirStores !== 'undefined') addPermanentMarkers(souvenirStores, '#daa65f', '🎁', souvenirMarkers);
     if (typeof restaurants !== 'undefined') addPermanentMarkers(restaurants, '#d47474', '🍽️', restaurantMarkers);
     
-    // 初始化永久店家清單
-    if (typeof showPermanentStores === 'function') {
-        showPermanentStores('all');
-    }
+    // 不自動顯示永久店家，改成點擊才顯示
     
     showDay(1);
     
@@ -306,6 +303,83 @@ function focusOnStoreByCoords(lat, lng, name) {
     }
 }
 
+// ==================== 永久店家摺疊功能 ====================
+function toggleStoreCategory(categoryType) {
+    const content = document.getElementById(`content-${categoryType}`);
+    const arrow = document.getElementById(`arrow-${categoryType}`);
+    
+    if (!content) return;
+    
+    // 如果已經打開，就關閉
+    if (content.style.display === 'block') {
+        content.style.display = 'none';
+        arrow.textContent = '▼';
+        return;
+    }
+    
+    // 如果是第一次打開且沒有內容，載入店家
+    if (!content.hasChildNodes() || content.children.length === 0) {
+        loadStoresByCategory(categoryType, content);
+    }
+    
+    // 打開這個分類
+    content.style.display = 'block';
+    arrow.textContent = '▲';
+}
+
+function loadStoresByCategory(categoryType, container) {
+    let stores = [];
+    
+    // 根據分類取得店家資料
+    if (categoryType === 'supermarket' && typeof supermarkets !== 'undefined') {
+        stores = supermarkets.map(s => ({...s, icon: '🛒'}));
+    } else if (categoryType === 'shopping' && typeof shoppingStores !== 'undefined') {
+        stores = shoppingStores.map(s => ({...s, icon: '🛍️'}));
+    } else if (categoryType === 'souvenir' && typeof souvenirStores !== 'undefined') {
+        stores = souvenirStores.map(s => ({...s, icon: '🎁'}));
+    } else if (categoryType === 'restaurant' && typeof restaurants !== 'undefined') {
+        stores = restaurants.map(s => ({...s, icon: '🍽️'}));
+    }
+    
+    if (stores.length === 0) {
+        container.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-gray);">沒有店家資料</div>';
+        return;
+    }
+    
+    // 生成店家卡片
+    let html = '<div class="stores-grid">';
+    
+    stores.forEach(store => {
+        const googleMapsUrl = getSafeMapUrl(store.name, store.url);
+        
+        html += `
+            <div class="store-item">
+                <div class="store-item-header">
+                    <span class="store-icon">${store.icon}</span>
+                    <h4 class="store-name">${store.name}</h4>
+                </div>
+                <div class="store-desc">${store.desc}</div>
+                ${store.hours ? `<div style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">⏰ ${store.hours}</div>` : ''}
+                <div class="store-tags">
+                    ${store.tags.map(tag => `<span class="store-tag">${tag}</span>`).join('')}
+                </div>
+                <div class="store-actions">
+                    <button class="store-map-btn" onclick="focusOnStoreByCoords(${store.coords[0]}, ${store.coords[1]}, '${store.name}')">
+                        📍 在地圖上查看
+                    </button>
+                    <a href="${googleMapsUrl}" target="_blank" class="store-google-btn" onclick="event.stopPropagation();">
+                        🗺️ Google 地圖
+                    </a>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// 舊函數保留（以防其他地方有用到）
 function showPermanentStores(type) {
     const listContainer = document.getElementById('permanent-stores-list');
     const buttons = document.querySelectorAll('.store-filter-btn');
@@ -419,19 +493,31 @@ function getCategoryColor(category) {
 }
 // ==================== 倒數計時功能 ====================
 function initCountdown() {
-    const targetDate = new Date('2026-05-20T11:35:00+08:00').getTime(); // 出發時間
+    // 2026-05-20 11:35 台北時間
+    const targetDate = new Date('2026-05-20T11:35:00+08:00');
     
     function updateCountdown() {
-        const now = new Date().getTime();
+        const now = new Date();
         const distance = targetDate - now;
         
+        // 檢查所有元素是否存在
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const labelEl = document.querySelector('.countdown-label');
+        
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+            console.error('倒數計時元素未找到');
+            return;
+        }
+        
         if (distance < 0) {
-            // 已經出發
-            document.getElementById('days').textContent = '00';
-            document.getElementById('hours').textContent = '00';
-            document.getElementById('minutes').textContent = '00';
-            document.getElementById('seconds').textContent = '00';
-            document.querySelector('.countdown-label').textContent = '旅程已開始！';
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            if (labelEl) labelEl.textContent = '旅程已開始！';
             return;
         }
         
@@ -440,14 +526,15 @@ function initCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        document.getElementById('days').textContent = String(days).padStart(2, '0');
-        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
     }
     
-    // 立即執行一次
     updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
     
     // 每秒更新
     setInterval(updateCountdown, 1000);
